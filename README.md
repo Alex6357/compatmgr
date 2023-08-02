@@ -11,6 +11,9 @@
 
 已支持的发行版：  
 - [x] Debian 12 (bookworm)
+- [x] Debian 11 (bullseye)
+- [x] Ubuntu 22.04 (jammy)
+- [x] Ubuntu 20.04 (focal)
 
 
 ## Linux compatitive layer manager for FreeBSD
@@ -25,3 +28,6 @@ Features to be added:
 
 Distributions avaliable:
 - [x] Debian 12 (bookworm)
+- [x] Debian 11 (bullseye)
+- [x] Ubuntu 22.04 (jammy)
+- [x] Ubuntu 20.04 (focal)
