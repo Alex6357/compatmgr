@@ -16,6 +16,7 @@
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
 - [x] Deepin 23 (beige)
+- [x] Fedora
 
 目前有问题的发行版：
 - [ ] Deepin 20 (apricot) --- debootstrap依赖解析存在问题
@@ -38,6 +39,7 @@ Distributions avaliable:
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
 - [x] Deepin 23 (beige)
+- [x] Fedora
 
 Distributions that have problems:
 - [ ] Deepin 20 (apricot) --- debootstrap dependency resolution issue
