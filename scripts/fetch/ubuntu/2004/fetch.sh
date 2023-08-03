@@ -17,26 +17,6 @@ echo ""
 ${DIR}/scripts/check.sh
 echo ""
 
-if ! which -s debootstrap; then
-    while true; do
-        echo -n "$(tr INSTALL_DEBOOTSTRAP_OR_NOT)[Y|n]"
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(tr INSTALL_FAILED_DEBOOTSTRAP_NOT_INSTALLED)
-            exit 1;
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr INSTALL_DEBOOTSTRAP)
-            pkg install -y debootstrap
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
-fi
-
 while true; do
     while true; do
         INSTALL_DIR=${DEFAULT_INSTALL_DIR}

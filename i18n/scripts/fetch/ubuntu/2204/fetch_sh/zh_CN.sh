@@ -2,15 +2,6 @@
 
 tr () {
     case ${1} in
-    "INSTALL_DEBOOTSTRAP_OR_NOT")
-        echo "debootstrap未安装。是否现在安装？"
-        ;;
-    "INSTALL_FAILED_DEBOOTSTRAP_NOT_INSTALLED")
-        echo "安装失败。debootstrap未安装。"
-        ;;
-    "INSTALL_DEBOOTSTRAP")
-        echo "正在安装debootstrap"
-        ;;
     "CHANGE_INSTALL_DIR_OR_NOT")
         echo "选择安装位置"
         ;;

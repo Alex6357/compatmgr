@@ -64,7 +64,8 @@ while true; do
             echo "2) Ubuntu"
             echo "3) Kali"
             echo "4) Deepin"
-            echo "5) $(tr CHOICE_RETURN)"
+            echo "5) Fedora"
+            echo "6) $(tr CHOICE_RETURN)"
             echo -n $(tr REQUIRE_CHOICE)
 
             read CHOICE
@@ -98,6 +99,13 @@ while true; do
                 fi
                 ;;
             5)
+                ${DIR}/scripts/fedora.sh
+                STATUS=${?}
+                if [ ${STATUS} -eq 9 ]; then
+                    BACK_TO_MENU=1
+                fi
+                ;;
+            6)
                 break
                 ;;
             *)

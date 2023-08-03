@@ -1,16 +1,19 @@
 #!/bin/sh
 
-export DIST_NAME="ubuntu"
-export DIST_FULLNAME="Ubuntu ${VERSION}"
+SUB_VERSION="1.6"
+VERSION="38"
+TYPE="Base"
+export DIST_NAME="fedora"
+export DIST_FULLNAME="Fedora ${VERSION} ${TYPE}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-SUB_VERSION=".2"
-VERSION="22.04"
+FILE=Fedora-Container-${TYPE}-${VERSION}-${SUB_VERSION}.x86_64.tar.xz
+URL=https://mirrors.ustc.edu.cn/fedora/releases/${VERSION}/Container/x86_64/images/${FILE}
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2204/fetch_sh/zh_CN.sh
+    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2204/fetch_sh/en_US.sh
+    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/en_US.sh
 fi
 
 echo ""
@@ -80,7 +83,7 @@ if [ ! -d ${DIR}/temp ]; then
     mkdir ${DIR}/temp
 fi
 
-fetch https://mirrors.ustc.edu.cn/ubuntu-cdimage/ubuntu-base/releases/jammy/release/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -o ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
+fetch ${URL} -o ${DIR}/temp/${FILE}
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
@@ -88,8 +91,16 @@ if [ ${STATUS} -ne 0 ]; then
     exit 2
 fi
 
-tar xvpf ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -C ${INSTALL_DIR} --numeric-owner
+tar xvpf ${DIR}/temp/${FILE} -C ${DIR}/temp
+STATUS=${?}
+if [ ${STATUS} -ne 0 ]; then
+    export STATUS
+    echo $(tr INSTALL_FAILED_TAR)
+    exit 3
+fi
 
+
+tar xvpf $(find ${DIR}/temp -name layer.tar) -C ${INSTALL_DIR} --numeric-owner
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
@@ -100,9 +111,8 @@ else
     echo ""
     echo $(tr SETTING_UP)
     echo ""
-    export IS_FETCH=1
-    ${DIR}/scripts/setup/ubuntu/2204/setup.sh
-    rm ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
+    ${DIR}/scripts/setup/fedora/setup.sh
+    rm -rf ${DIR}/temp
 fi
 
 exit 9
