@@ -14,6 +14,7 @@
 - [x] Debian 11 (bullseye)
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
+- [x] Kali rolling
 
 
 ## Linux compatitive layer manager for FreeBSD
@@ -31,3 +32,4 @@ Distributions avaliable:
 - [x] Debian 11 (bullseye)
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
+- [x] Kali rolling
