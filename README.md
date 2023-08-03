@@ -15,6 +15,10 @@
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
+- [x] Deepin 23 (beige)
+
+目前有问题的发行版：
+- [ ] Deepin 20 (apricot) --- debootstrap依赖解析存在问题
 
 
 ## Linux compatitive layer manager for FreeBSD
@@ -33,3 +37,7 @@ Distributions avaliable:
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
+- [x] Deepin 23 (beige)
+
+Distributions that have problems:
+- [ ] Deepin 20 (apricot) --- debootstrap dependency resolution issue
