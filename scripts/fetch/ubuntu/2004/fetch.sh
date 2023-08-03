@@ -120,7 +120,7 @@ else
     echo ""
     echo $(tr SETTING_UP)
     echo ""
-    # ${DIR}/scripts/setup/ubuntu/2004/setup.sh
+    ${DIR}/scripts/setup/ubuntu/2004/setup.sh
     rm ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
 fi
 

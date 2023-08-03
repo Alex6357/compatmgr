@@ -11,7 +11,7 @@ while true; do
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo "USE_LOCAL_DNS"
+        echo $(tr USE_LOCAL_DNS)
         grep nameserver ${INSTALL_DIR}/etc/resolv.conf
         break
         ;;
@@ -32,7 +32,7 @@ while true; do
     [Nn][Oo]|[Nn])
         echo $(tr WARN_MOUNT_MANUALLY)
         while true; do
-            echo "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]"
+            echo -n "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]"
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss]|[Yy])

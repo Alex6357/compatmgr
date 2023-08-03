@@ -37,7 +37,7 @@ while true; do
     [Nn][Oo]|[Nn])
         echo $(tr WARN_MOUNT_MANUALLY)
         while true; do
-            echo "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]"
+            echo -n "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]"
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss]|[Yy])
@@ -129,7 +129,7 @@ EOF
             sed -i '' 's/http/https/g' ${INSTALL_DIR}/etc/apt/sources.list
         else
             while true; do
-                echo "$(tr USE_HTTPS_SOURCES_OR_NOT)[Y|n]"
+                echo -n "$(tr USE_HTTPS_SOURCES_OR_NOT)[Y|n]"
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy]|"")
@@ -156,7 +156,7 @@ done
 
 if [ ${IS_FETCH} -eq 1 ]; then
     while true; do
-        echo $(tr INSTALL_VIM_OR_NOT)
+        echo -n "$(tr INSTALL_VIM_OR_NOT)[Y|n]"
         read ANSWER
         case ${ANSWER} in
         [Yy][Ee][Ss]|[Yy]|"")

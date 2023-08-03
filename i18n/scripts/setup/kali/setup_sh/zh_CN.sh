@@ -30,7 +30,7 @@ tr () {
         echo "是否配置全部ustc源？"
         ;;
     "SOURCE_NOT_ADDED")
-        echo "镜像源未配置，仅有bookworm main可用"
+        echo "镜像源未配置，仅有kali-rolling main可用"
         ;;
     "ADD_SOURCE")
         echo "正在配置ustc源"

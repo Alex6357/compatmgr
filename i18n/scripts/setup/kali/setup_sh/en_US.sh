@@ -30,7 +30,7 @@ tr () {
         echo "Use ALL ustc sources?"
         ;;
     "SOURCE_NOT_ADDED")
-        echo "ustc sources not set. Only bookworm main avaliable"
+        echo "ustc sources not set. Only kali-rolling main avaliable"
         ;;
     "ADD_SOURCE")
         echo "Setting ustc sources"
