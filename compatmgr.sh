@@ -62,7 +62,8 @@ while true; do
             echo $(tr INSTALL_SELECT)
             echo "1) Debian"
             echo "2) Ubuntu"
-            echo "3) $(tr CHOICE_RETURN)"
+            echo "3) Kali"
+            echo "4) $(tr CHOICE_RETURN)"
             echo -n $(tr REQUIRE_CHOICE)
 
             read CHOICE
@@ -82,6 +83,13 @@ while true; do
                 fi
                 ;;
             3)
+                ${DIR}/scripts/kali.sh
+                STATUS=${?}
+                if [ ${STATUS} -eq 9 ]; then
+                    BACK_TO_MENU=1
+                fi
+                ;;
+            4)
                 break
                 ;;
             *)

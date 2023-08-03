@@ -2,9 +2,6 @@
 
 tr () {
     case ${1} in
-    "CHOOSE_UBUNTU_VERSION")
-        echo "请选择Ubuntu版本："
-        ;;
     "INSTALLING")
         echo "正在安装："
         ;;
@@ -15,7 +12,7 @@ tr () {
         echo "通过debootstrap安装"
         ;;
     "METHORD_PREBUILT")
-        echo "从ustc下载预构建的压缩包"
+        echo "下载预构建的压缩包（非官方发行！）"
         ;;
     "RETURN")
         echo "返回上一级"

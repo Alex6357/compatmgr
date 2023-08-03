@@ -11,7 +11,7 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_DEBIAN_VERSION)
+    echo $(tr CHOOSE_UBUNTU_VERSION)
     echo "1) 22.04 (jammy)"
     echo "2) 20.04 (focal)"
     echo "3) $(tr RETURN)"

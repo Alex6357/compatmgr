@@ -62,6 +62,7 @@ while true; do
                 ;;
             esac
         done
+        break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
         echo $(tr ADD_FSTAB)

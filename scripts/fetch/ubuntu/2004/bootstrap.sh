@@ -102,7 +102,7 @@ STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
     echo $(tr INSTALL_FAILED)
-    exit ${STATUS}
+    exit 2
 else
     echo $(tr INSTALL_COMPLETE)
     echo ""

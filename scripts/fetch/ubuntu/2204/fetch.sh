@@ -105,7 +105,7 @@ STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
     echo $(tr INSTALL_FAILED_FETCH)
-    exit 1
+    exit 2
 fi
 
 tar xvpf ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -C ${INSTALL_DIR} --numeric-owner
@@ -114,7 +114,7 @@ STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
     echo $(tr INSTALL_FAILED_TAR)
-    exit 2
+    exit 3
 else
     echo $(tr INSTALL_COMPLETE)
     echo ""

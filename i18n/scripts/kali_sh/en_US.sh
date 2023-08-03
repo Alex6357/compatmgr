@@ -2,9 +2,6 @@
 
 tr () {
     case ${1} in
-    "CHOOSE_UBUNTU_VERSION")
-        echo "Choose Ubuntu version:"
-        ;;
     "INSTALLING")
         echo "Installing: "
         ;;
@@ -15,7 +12,7 @@ tr () {
         echo "Install by debootstrap"
         ;;
     "METHORD_PREBUILT")
-        echo "Download prebuilt package from ustc"
+        echo "Download prebuilt package (not an official release!)"
         ;;
     "RETURN")
         echo "Return to previous menu"

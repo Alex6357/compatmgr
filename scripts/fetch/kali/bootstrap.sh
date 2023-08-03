@@ -1,16 +1,16 @@
 #!/bin/sh
 
-export DIST_NAME="ubuntu"
-export DIST_FULLNAME="Ubuntu ${VERSION}"
+export DIST_NAME="kali"
+export DIST_FULLNAME="Kali"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-SUB_VERSION=".5"
-VERSION="20.04"
+YEAR="2023"
+NUMBER="2a"
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/zh_CN.sh
+    . ${DIR}/i18n/scripts/fetch/kali/bootstrap_sh/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/en_US.sh
+    . ${DIR}/i18n/scripts/fetch/kali/bootstrap_sh/en_US.sh
 fi
 
 echo ""
@@ -96,32 +96,21 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-if [ ! -d ${DIR}/temp ]; then
-    mkdir ${DIR}/temp
-fi
-
-fetch https://mirrors.ustc.edu.cn/ubuntu-cdimage/ubuntu-base/releases/focal/release/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -o ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
-STATUS=${?}
-if [ ${STATUS} -ne 0 ]; then
-    export STATUS
-    echo $(tr INSTALL_FAILED_FETCH)
-    exit 2
-fi
-
-tar xvpf ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -C ${INSTALL_DIR} --numeric-owner
+debootstrap --exclude=usr-is-merged --include=usrmerge kali-rolling ${INSTALL_DIR} https://mirrors.ustc.edu.cn/kali
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
-    echo $(tr INSTALL_FAILED_TAR)
-    exit 3
+    echo $(tr INSTALL_FAILED)
+    exit ${STATUS}
 else
     echo $(tr INSTALL_COMPLETE)
+    echo $(tr REMOVE_DEBOOTSTRAP_FILES)
+    rm -rf ${INSTALL_DIR}/debootstrap
     echo ""
     echo $(tr SETTING_UP)
     echo ""
-    # ${DIR}/scripts/setup/ubuntu/2004/setup.sh
-    rm ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
+    ${DIR}/scripts/setup/kali/setup.sh
 fi
 
 exit 9
