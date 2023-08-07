@@ -6,7 +6,7 @@ tr () {
         echo "Installing: "
         ;;
     "CHOOSE_INSTALL_METHORD")
-        echo "Please select installation methord:"
+        echo "Please select installation methord: "
         ;;
     "METHORD_BOOTSTRAP")
         echo "Install by debootstrap"
@@ -18,7 +18,7 @@ tr () {
         echo "Return to previous menu"
         ;;
     "REQUIRE_CHOICE")
-        echo "Enter your choice:"
+        echo "Enter your choice: "
         ;;
     *)
         echo ${1}

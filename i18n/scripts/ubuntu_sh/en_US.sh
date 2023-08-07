@@ -3,13 +3,13 @@
 tr () {
     case ${1} in
     "CHOOSE_UBUNTU_VERSION")
-        echo "Choose Ubuntu version:"
+        echo "Choose Ubuntu version: "
         ;;
     "INSTALLING")
         echo "Installing: "
         ;;
     "CHOOSE_INSTALL_METHORD")
-        echo "Please select installation methord:"
+        echo "Please select installation methord: "
         ;;
     "METHORD_BOOTSTRAP")
         echo "Install by debootstrap"
@@ -21,7 +21,7 @@ tr () {
         echo "Return to previous menu"
         ;;
     "REQUIRE_CHOICE")
-        echo "Enter your choice:"
+        echo "Enter your choice: "
         ;;
     *)
         echo ${1}

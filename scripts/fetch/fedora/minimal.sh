@@ -24,7 +24,7 @@ echo ""
 while true; do
     while true; do
         INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-        echo -n "$(tr CHANGE_INSTALL_DIR_OR_NOT)[${INSTALL_DIR}]"
+        echo -n "$(tr CHANGE_INSTALL_DIR_OR_NOT)[${INSTALL_DIR}]: "
         read ANSWER
         if [ -z ${ANSWER} ]; then
             break
@@ -32,7 +32,7 @@ while true; do
             USER_INSTALL_DIR=${ANSWER}
         fi
         while true; do
-            echo -n "$(tr CONFIRM_INSTALL_DIR_OR_NOT)(${USER_INSTALL_DIR})[yes|NO]"
+            echo -n "$(tr CONFIRM_INSTALL_DIR_OR_NOT)(${USER_INSTALL_DIR})[yes|NO]: "
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss])
@@ -52,7 +52,7 @@ while true; do
         if [ "$(ls -A ${INSTALL_DIR})" ]; then
             FORCE_INSTALL=0
             while true; do
-                echo -n "$(tr WARN_DIR_NOT_EMPTY)(${INSTALL_DIR})[yes|NO]"
+                echo -n "$(tr WARN_DIR_NOT_EMPTY)(${INSTALL_DIR})[yes|NO]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss])

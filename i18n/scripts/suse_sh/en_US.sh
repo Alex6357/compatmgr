@@ -21,7 +21,7 @@ tr () {
         echo "Return to previous menu"
         ;;
     "REQUIRE_CHOICE")
-        echo "Enter your choice:"
+        echo "Enter your choice: "
         ;;
     *)
         echo ${1}

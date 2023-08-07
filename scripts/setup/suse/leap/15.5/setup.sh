@@ -9,7 +9,7 @@ fi
 IS_MINIMAL=${IS_MINIMAL:-0}
 
 while true; do
-    echo -n "$(tr USE_ALI_DNS_OR_NOT)[Y|n]"
+    echo -n "$(tr USE_ALI_DNS_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
@@ -29,13 +29,13 @@ while true; do
 done
 
 while true; do
-    echo -n "$(tr ADD_FSTAB_OR_NOT)[Y|n]"
+    echo -n "$(tr ADD_FSTAB_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
         echo $(tr WARN_MOUNT_MANUALLY)
         while true; do
-            echo -n "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]"
+            echo -n "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]: "
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss]|[Yy])
@@ -86,7 +86,7 @@ done
 
 
 while true; do
-    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]"
+    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
@@ -128,7 +128,7 @@ if [ ${IS_DNF} -eq 0 ];then
 fi
 
 while true; do
-    echo -n "$(tr INSTALL_VIM_OR_NOT)[Y|n]"
+    echo -n "$(tr INSTALL_VIM_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Yy][Ee][Ss]|[Yy]|"")

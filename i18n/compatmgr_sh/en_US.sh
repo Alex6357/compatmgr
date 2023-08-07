@@ -9,7 +9,7 @@ tr () {
             echo "Welcome to use FreeBSD compat manager! Author: Alex11"
             ;;
         "PLEASE_SELECT")
-            echo "Please choose:"
+            echo "Please choose: "
             ;;
         "CHOICE_CHECK")
             echo "Check environment"
@@ -24,19 +24,19 @@ tr () {
             echo "Exit"
             ;;
         "REQUIRE_CHOICE")
-            echo "Enter your choice:"
+            echo "Enter your choice: "
             ;;
         "GOODBYE")
             echo "Goodbye!"
             ;;
         "INSTALL_SELECT")
-            echo "Select the distribution you want to install:"
+            echo "Select the distribution you want to install: "
             ;;
         "CHOICE_RETURN")
             echo "Return to previous menu"
             ;;
         "REMOVE_SELECT")
-            echo "Select the distribution you want to remove:"
+            echo "Select the distribution you want to remove: "
             ;;
         "CHECK_SUCCESS")
             echo "Environment check succeed."

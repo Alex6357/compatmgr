@@ -10,13 +10,13 @@ echo $(tr CHECK_START)
 
 if [ ! "`sysrc -n linux_enable`" = "YES" ]; then
     while true; do
-        echo -n "$(tr ENABLE_LINUX_OR_NOT)[Y|n]"
+        echo -n "$(tr ENABLE_LINUX_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
             echo $(tr WARN_START_LINUX)
             while ture; do
-                echo -n "$(tr CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]"
+                echo -n "$(tr CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
@@ -71,7 +71,7 @@ fi
 
 if [ ${LINUX_ENABLED} = 0 ]; then
     while true; do
-        echo -n "$(tr START_LINUX_OR_NOT)[Y|n]"
+        echo -n "$(tr START_LINUX_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
@@ -92,7 +92,7 @@ fi
 
 if ! which -s dbus-daemon; then
     while true; do
-        echo -n "$(tr INSTALL_DUBS_OR_NOT)[Y|n]"
+        echo -n "$(tr INSTALL_DUBS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
@@ -113,13 +113,13 @@ fi
 
 if [ ! "`sysrc -n dbus_enable`" = "YES" ]; then
     while true; do
-        echo -n "$(tr ENABLE_DUBS_OR_NOT)[Y|n]"
+        echo -n "$(tr ENABLE_DUBS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
             echo $(tr WARN_START_DBUS)
             while true; do
-                echo -n "$(tr CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)[y|N]"
+                echo -n "$(tr CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
@@ -150,7 +150,7 @@ fi
 
 if [ -z "`ps aux | grep -p dbus | grep -v grep`" ]; then
     while ture; do
-        echo -n "$(tr START_DBUS_OR_NOT)[Y|n]"
+        echo -n "$(tr START_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
@@ -170,13 +170,13 @@ fi
 
 if [ ! "`sysrc -f /boot/loader.conf -qn nullfs_load`" = "YES" ]; then
     while true; do
-        echo -n "$(tr LOAD_NULLFS_OR_NOT)[Y|n]"
+        echo -n "$(tr LOAD_NULLFS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
             echo $(tr WARN_LOAD_NULLFS)
             while ture; do
-                echo -n "$(tr CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]"
+                echo -n "$(tr CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
@@ -208,7 +208,7 @@ fi
 
 if [ -z "`kldstat -n nullfs`" ]; then
     while true; do
-        echo -n "$(tr LOAD_NULLFS_MODULE_OR_NOT)[Y|n]"
+        echo -n "$(tr LOAD_NULLFS_MODULE_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])

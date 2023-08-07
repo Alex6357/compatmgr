@@ -6,7 +6,7 @@ tr () {
         echo "Do you want to use Ali DNS? If not, local resolv.conf will be used by default."
         ;;
     "USE_LOCAL_DNS")
-        echo "Using local resolv.conf:"
+        echo "Using local resolv.conf: "
         ;;
     "USE_ALI_DNS")
         echo "Setting Ali DNS"

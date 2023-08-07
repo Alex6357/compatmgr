@@ -3,13 +3,13 @@
 tr () {
     case ${1} in
     "CHOOSE_DEEPIN_VERSION")
-        echo "Choose Debian version:"
+        echo "Choose Debian version: "
         ;;
     "INSTALLING")
         echo "Installing: "
         ;;
     "CHOOSE_INSTALL_METHORD")
-        echo "Please select installation METHORD:"
+        echo "Please select installation METHORD: "
         ;;
     "METHORD_BOOTSTRAP")
         echo "Install by debootstrap"
@@ -21,7 +21,7 @@ tr () {
         echo "Return to previous menu"
         ;;
     "REQUIRE_CHOICE")
-        echo "Enter your choice:"
+        echo "Enter your choice: "
         ;;
     *)
         echo ${1}
