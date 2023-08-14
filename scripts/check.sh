@@ -15,7 +15,7 @@ if [ ! "`sysrc -n linux_enable`" = "YES" ]; then
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
             echo $(tr WARN_START_LINUX)
-            while ture; do
+            while true; do
                 echo -n "$(tr CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
@@ -80,7 +80,7 @@ if [ ${LINUX_ENABLED} = 0 ]; then
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
             echo $(tr START_LINUX)
-            service linux start
+            service linux onestart
             break
             ;;
         *)
@@ -92,7 +92,7 @@ fi
 
 if ! which -s dbus-daemon; then
     while true; do
-        echo -n "$(tr INSTALL_DUBS_OR_NOT)[Y|n]: "
+        echo -n "$(tr INSTALL_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
@@ -111,9 +111,9 @@ if ! which -s dbus-daemon; then
 fi
 
 
-if [ ! "`sysrc -n dbus_enable`" = "YES" ]; then
+if [ ! $(sysrc -n dbus_enable | grep [Yy][Ee][Ss]) ]; then
     while true; do
-        echo -n "$(tr ENABLE_DUBS_OR_NOT)[Y|n]: "
+        echo -n "$(tr ENABLE_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
@@ -149,7 +149,7 @@ if [ ! "`sysrc -n dbus_enable`" = "YES" ]; then
 fi
 
 if [ -z "`ps aux | grep -p dbus | grep -v grep`" ]; then
-    while ture; do
+    while true; do
         echo -n "$(tr START_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
@@ -175,7 +175,7 @@ if [ ! "`sysrc -f /boot/loader.conf -qn nullfs_load`" = "YES" ]; then
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
             echo $(tr WARN_LOAD_NULLFS)
-            while ture; do
+            while true; do
                 echo -n "$(tr CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
