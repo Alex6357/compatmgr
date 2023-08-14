@@ -19,6 +19,7 @@
 - [x] Fedora
 - [x] openSUSE Leap 15.5
 - [x] openSUSE Tumbleweed （存在一定问题）
+- [x] Gentoo
 
 目前有问题的发行版：
 - [ ] Deepin 20 (apricot) --- debootstrap依赖解析存在问题
@@ -44,6 +45,7 @@ Distributions avaliable:
 - [x] Fedora
 - [x] openSUSE Leap 15.5
 - [x] openSUSE Tumbleweed (have some problems)
+- [x] Gentoo
 
 Distributions that have problems:
 - [ ] Deepin 20 (apricot) --- debootstrap dependency resolution issue
