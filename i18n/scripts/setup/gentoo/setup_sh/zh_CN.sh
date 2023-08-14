@@ -2,6 +2,12 @@
 
 tr () {
     case ${1} in
+    "ADD_FEATURES")
+        echo "正在为Gentoo添加make feature"
+        ;;
+    "COPY_REPO_CONFIG")
+        echo "正在复制repos.conf"
+        ;;
     "ADD_SOURCE_OR_NOT")
         echo "是否配置全部ustc源？"
         ;;
@@ -10,15 +16,6 @@ tr () {
         ;;
     "ADD_SOURCE")
         echo "正在配置ustc源"
-        ;;
-    "USE_HTTPS_SOURCES_OR_NOT")
-        echo "是否使用https源？这将会安装ca-certificates"
-        ;;
-    "USE_HTTPS_SOURCES")
-        echo "正在配置https源"
-        ;;
-    "HTTPS_SOURCES_NOT_USED")
-        echo "正在使用http源"
         ;;
     "INSTALL_VIM_OR_NOT")
         echo "兼容层没有文本编辑器。是否安装vim？"

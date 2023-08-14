@@ -66,7 +66,8 @@ while true; do
             echo "4) Deepin"
             echo "5) Fedora"
             echo "6) openSUSE"
-            echo "7) $(tr CHOICE_RETURN)"
+            echo "7) Gentoo"
+            echo "8) $(tr CHOICE_RETURN)"
             echo -n $(tr REQUIRE_CHOICE)
 
             read CHOICE
@@ -114,6 +115,13 @@ while true; do
                 fi
                 ;;
             7)
+                ${DIR}/scripts/gentoo.sh
+                STATUS=${?}
+                if [ ${STATUS} -eq 9 ]; then
+                    BACK_TO_MENU=1
+                fi
+                ;;
+            8)
                 break
                 ;;
             *)

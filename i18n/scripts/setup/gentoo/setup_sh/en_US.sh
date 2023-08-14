@@ -2,6 +2,12 @@
 
 tr () {
     case ${1} in
+    "ADD_FEATURES")
+        echo "Adding make features to Gentoo"
+        ;;
+    "COPY_REPO_CONFIG")
+        echo "Copying repo config file"
+        ;;
     "ADD_SOURCE_OR_NOT")
         echo "Use ALL ustc sources?"
         ;;
@@ -10,15 +16,6 @@ tr () {
         ;;
     "ADD_SOURCE")
         echo "Setting ustc sources"
-        ;;
-    "USE_HTTPS_SOURCES_OR_NOT")
-        echo "Use https sources? Notice this will also install ca-certificates"
-        ;;
-    "USE_HTTPS_SOURCES")
-        echo "Setting https sources"
-        ;;
-    "HTTPS_SOURCES_NOT_USED")
-        echo "Using http sources"
         ;;
     "INSTALL_VIM_OR_NOT")
         echo "This package doesn't contain any editor. Install vim as your aditor?"
