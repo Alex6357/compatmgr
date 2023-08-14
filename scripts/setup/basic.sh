@@ -12,6 +12,7 @@ while true; do
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
         echo $(tr USE_LOCAL_DNS)
+        cp -f /etc/resolv.conf ${INSTALL_DIR}/etc/resolv.conf
         grep nameserver ${INSTALL_DIR}/etc/resolv.conf
         break
         ;;
