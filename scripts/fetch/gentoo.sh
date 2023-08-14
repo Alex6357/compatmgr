@@ -103,5 +103,4 @@ else
     rm -rf ${DIR}/temp
 fi
 
-${DIR}/scripts/setup/gentoo/setup.sh
 exit 9
