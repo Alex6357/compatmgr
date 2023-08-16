@@ -67,7 +67,8 @@ while true; do
             echo "5) Fedora"
             echo "6) openSUSE"
             echo "7) Gentoo"
-            echo "8) $(tr CHOICE_RETURN)"
+            echo "8) Arch Linux"
+            echo "9) $(tr CHOICE_RETURN)"
             echo -n $(tr REQUIRE_CHOICE)
 
             read CHOICE
@@ -122,6 +123,13 @@ while true; do
                 fi
                 ;;
             8)
+                ${DIR}/scripts/fetch/arch.sh
+                STATUS=${?}
+                if [ ${STATUS} -eq 9 ]; then
+                    BACK_TO_MENU=1
+                fi
+                ;;
+            9)
                 break
                 ;;
             *)
