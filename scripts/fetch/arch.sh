@@ -1,17 +1,33 @@
 #!/bin/sh
 
-export DIST_NAME="arch"
-export DIST_FULLNAME="Arch Linux"
-DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
-export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-FILE=archlinux-bootstrap-x86_64.tar.gz
-URL=https://mirrors.ustc.edu.cn/archlinux/iso/latest/${FILE}
-
 if echo ${LANG} | grep -q "^zh_CN"; then
     . ${DIR}/i18n/scripts/fetch/arch_sh/zh_CN.sh
 else
     . ${DIR}/i18n/scripts/fetch/arch_sh/en_US.sh
 fi
+
+case ${MACHINE_ARCH} in
+amd64)
+    FILE="archlinux-bootstrap-x86_64.tar.gz"
+    URL="https://mirrors.ustc.edu.cn/archlinux/iso/latest/${FILE}"
+    EXTRA="--strip-components 1"
+    ;;
+arm64)
+    FILE="ArchLinuxARM-aarch64-latest.tar.gz"
+    URL="https://mirrors.ustc.edu.cn/archlinuxarm/os/${FILE}"
+    EXTRA=""
+    printf "$(tr NOTICE_UNINSTALL_KERNEL)\n"
+    ;;
+i386)
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+    ;;
+esac
+
+export DIST_NAME="arch"
+export DIST_FULLNAME="Arch Linux"
+DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
+export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 
 echo ""
 ${DIR}/scripts/check.sh
@@ -88,7 +104,7 @@ if [ ${STATUS} -ne 0 ]; then
     exit 2
 fi
 
-tar xvpf ${DIR}/temp/${FILE} -C ${INSTALL_DIR} --numeric-owner --strip-components 1
+tar xvpf ${DIR}/temp/${FILE} -C ${INSTALL_DIR} --numeric-owner ${EXTRA}
 
 echo $(tr INSTALL_COMPLETE)
 echo ""

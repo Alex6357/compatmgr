@@ -1,17 +1,24 @@
 #!/bin/sh
 
+if echo ${LANG} | grep -q "^zh_CN"; then
+    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/zh_CN.sh
+else
+    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/en_US.sh
+fi
+
+if [ ${MACHINE_ARCH} = "i386" ]; then
+    echo $(tr ARCH_NOT_SUPPORTED_FETCH)
+    exit 1
+fi
+
 export DIST_NAME="ubuntu"
 export DIST_FULLNAME="Ubuntu ${VERSION}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 SUB_VERSION=".5"
 VERSION="20.04"
-
-if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/zh_CN.sh
-else
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/en_US.sh
-fi
+URL="https://mirrors.ustc.edu.cn/ubuntu-cdimage/ubuntu-base/releases/focal/release"
+FILE="ubuntu-base-${VERSION}${SUB_VERSION}-base-${MACHINE_ARCH}.tar.gz"
 
 echo ""
 ${DIR}/scripts/check.sh
@@ -80,7 +87,7 @@ if [ ! -d ${DIR}/temp ]; then
     mkdir ${DIR}/temp
 fi
 
-fetch https://mirrors.ustc.edu.cn/ubuntu-cdimage/ubuntu-base/releases/focal/release/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -o ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
+fetch ${URL}/${FILE} -o ${DIR}/temp/${FILE}
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
@@ -88,7 +95,7 @@ if [ ${STATUS} -ne 0 ]; then
     exit 2
 fi
 
-tar xvpf ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz -C ${INSTALL_DIR} --numeric-owner
+tar xvpf ${DIR}/temp/${FILE} -C ${INSTALL_DIR} --numeric-owner
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
@@ -101,7 +108,7 @@ else
     echo $(tr SETTING_UP)
     echo ""
     ${DIR}/scripts/setup/ubuntu/2004/setup.sh
-    rm ${DIR}/temp/ubuntu-base-${VERSION}${SUB_VERSION}-base-amd64.tar.gz
+    rm -rf ${DIR}/temp
 fi
 
 exit 9

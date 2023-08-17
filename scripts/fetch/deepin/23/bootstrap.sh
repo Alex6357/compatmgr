@@ -15,6 +15,11 @@ echo ""
 ${DIR}/scripts/check.sh
 echo ""
 
+if [ ${MACHINE_ARCH} = "arm64" ]; then
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+fi
+
 if ! which -s debootstrap; then
     while true; do
         echo -n "$(tr INSTALL_DEBOOTSTRAP_OR_NOT)[Y|n]: "
@@ -94,7 +99,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap --exclude=usr-is-merged,debian-archive-keyring --include=usrmerge bookworm ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
+debootstrap --exclude=usr-is-merged,debian-archive-keyring --include=usrmerge --arch=${MACHINE_ARCH} bookworm ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then

@@ -2,6 +2,9 @@
 
 tr () {
     case ${1} in
+    "ARCH_NOT_SUPPORTED")
+        echo "openSUSE does not support i386"
+        ;;
     "CHANGE_INSTALL_DIR_OR_NOT")
         echo "Select install location"
         ;;

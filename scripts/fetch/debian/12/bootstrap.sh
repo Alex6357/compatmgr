@@ -94,7 +94,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap --exclude=usr-is-merged --include=usrmerge bookworm ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
+debootstrap --exclude=usr-is-merged --include=usrmerge --arch=${MACHINE_ARCH} bookworm ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then

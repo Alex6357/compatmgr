@@ -10,13 +10,27 @@ if [ ! -d ${DIR}/temp ]; then
     mkdir ${DIR}/temp
 fi
 
-fetch https://mirrors.ustc.edu.cn/gentoo/releases/amd64/autobuilds/latest-stage3.txt -o ${DIR}/temp/gentoo-list.txt
+case ${MACHINE_ARCH} in
+amd64)
+    export ARCH="amd64"
+    GREP_NAME="amd64"
+    ;;
+arm64)
+    export ARCH="arm64"
+    GREP_NAME="arm64"
+    ;;
+i386)
+    export ARCH="x86"
+    GREP_NAME="\"i*86\""
+esac
+
+fetch https://mirrors.ustc.edu.cn/gentoo/releases/${ARCH}/autobuilds/latest-stage3.txt -o ${DIR}/temp/gentoo-list.txt
 
 gentoo_list=""
 SUM=0
 
 while IFS='' read -r LINE; do
-    if echo ${LINE} | grep -q amd64; then
+    if echo ${LINE} | grep -q ${GREP_NAME}; then
         gentoo_list="${gentoo_list} ${LINE%%[[:space:]]*}"
         SUM=$((SUM + 1))
     fi

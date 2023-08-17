@@ -2,6 +2,13 @@
 
 tr () {
     case ${1} in
+    "NOTICE_UNINSTALL_KERNEL")
+        echo "Notice: Arch Linux ARM include kernel and initramfs, which are useless in Linuxulator."
+        echo "You may uninstall them later."
+        ;;
+    "ARCH_NOT_SUPPORT")
+        echo "Arch Linux does not support i386"
+        ;;
     "CHANGE_INSTALL_DIR_OR_NOT")
         echo "Select install location"
         ;;

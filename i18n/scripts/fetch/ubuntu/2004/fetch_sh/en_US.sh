@@ -2,6 +2,9 @@
 
 tr () {
     case ${1} in
+    "ARCH_NOT_SUPPORTED_FETCH")
+        echo "Ubuntu i386 does not support fetch install. You can install it with debootstrap."
+        ;;
     "CHANGE_INSTALL_DIR_OR_NOT")
         echo "Select install location"
         ;;

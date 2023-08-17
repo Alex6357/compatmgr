@@ -1,19 +1,32 @@
 #!/bin/sh
 
+if echo ${LANG} | grep -q "^zh_CN"; then
+    . ${DIR}/i18n/scripts/fetch/suse/tumbleweed/zypper_sh/zh_CN.sh
+else
+    . ${DIR}/i18n/scripts/fetch/suse/tumbleweed/zypper_sh/en_US.sh
+fi
+
+case ${MACHINE_ARCH} in
+amd64)
+    ARCH="x86_64"
+    ;;
+arm64)
+    ARCH="aarch64"
+    ;;
+i386)
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+    ;;
+esac
+
 export DIST_NAME="suse"
 export DIST_FULLNAME="openSUSE Tumbleweed"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 VERSION="15.5"
 URL="https://mirrors.ustc.edu.cn/opensuse/tumbleweed/appliances/"
-FILE="opensuse-tumbleweed-image.x86_64-lxc.tar.xz"
+FILE="opensuse-tumbleweed-image.${ARCH}-lxc.tar.xz"
 export IS_DNF=0
-
-if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/suse/tumbleweed/zypper_sh/zh_CN.sh
-else
-    . ${DIR}/i18n/scripts/fetch/suse/tumbleweed/zypper_sh/en_US.sh
-fi
 
 echo ""
 ${DIR}/scripts/check.sh

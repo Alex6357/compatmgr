@@ -2,6 +2,13 @@
 
 tr () {
     case ${1} in
+    "NOTICE_UNINSTALL_KERNEL")
+        echo "注意：Arch Linux ARM 包含内核和initramfs，这在Linux兼容层中无用。"
+        echo "你可以稍后卸载或删除内核和initramfs。"
+        ;;
+    "ARCH_NOT_SUPPORT")
+        echo "Arch Linux 不支持 i386"
+        ;;
     "CHANGE_INSTALL_DIR_OR_NOT")
         echo "选择安装位置"
         ;;

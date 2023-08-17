@@ -13,6 +13,24 @@ if [ ! "`whoami`" = "root" ]; then
     exit 1
 fi
 
+case $(sysctl -n hw.machine_arch) in
+amd64)
+    MACHINE_ARCH=amd64
+    ;;
+aarch64)
+    MACHINE_ARCH=arm64
+    ;;
+i386)
+    MACHINE_ARCH=i386
+    ;;
+*)
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+    ;;
+esac
+
+export MACHINE_ARCH
+
 while true; do
     export BACK_TO_MENU=0
     echo ""

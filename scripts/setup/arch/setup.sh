@@ -26,9 +26,16 @@ while true; do
     [Yy][Ee][Ss]|[Yy]|"")
         echo $(tr ADD_SOURCE)
         SOURCE_ADDED=1
-        sed -i '' \
-        -e 's|#Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch|Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch|g' \
-        ${INSTALL_DIR}/etc/pacman.d/mirrorlist
+        if [ ${MACHINE_ARCH} = "amd64" ]; then
+            sed -i '' \
+            -e 's|#Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch|Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch|g' \
+            ${INSTALL_DIR}/etc/pacman.d/mirrorlist
+        else
+            sed -i '' \
+            -e 's|Server = http://mirror.archlinuxarm.org|# Server = http://mirror.archlinuxarm.org|g' \
+            ${INSTALL_DIR}/etc/pacman.d/mirrorlist
+            echo "Server = https://mirrors.ustc.edu.cn/archlinuxarm/\$arch/\$repo" >> ${INSTALL_DIR}/etc/pacman.d/mirrorlist
+        fi
         break
         ;;
     *)

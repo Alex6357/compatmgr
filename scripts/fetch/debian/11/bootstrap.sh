@@ -94,7 +94,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap bullseye ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
+debootstrap --arch=${MACHINE_ARCH} bullseye ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then

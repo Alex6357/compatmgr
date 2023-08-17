@@ -1,5 +1,14 @@
 #!/bin/sh
 
+case ${MACHINE_ARCH} in
+amd64|i386)
+    URL="https://mirrors.ustc.edu.cn/ubuntu"
+    ;;
+arm64)
+    URL="https://mirrors.ustc.edu.cn/ubuntu-ports"
+    ;;
+esac
+
 export DIST_NAME="ubuntu"
 export DIST_FULLNAME="Ubuntu ${VERSION}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
@@ -96,7 +105,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap focal ${INSTALL_DIR} https://mirrors.ustc.edu.cn/ubuntu
+debootstrap focal ${INSTALL_DIR} ${URL}
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then

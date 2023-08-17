@@ -1,19 +1,32 @@
 #!/bin/sh
 
+if echo ${LANG} | grep -q "^zh_CN"; then
+    . ${DIR}/i18n/scripts/fetch/suse/leap/15.5/dnf_sh/zh_CN.sh
+else
+    . ${DIR}/i18n/scripts/fetch/suse/leap/15.5/dnf_sh/en_US.sh
+fi
+
+case ${MACHINE_ARCH} in
+amd64)
+    ARCH="x86_64"
+    ;;
+arm64)
+    ARCH="aarch64"
+    ;;
+i386)
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+    ;;
+esac
+
 export DIST_NAME="suse"
 export DIST_FULLNAME="openSUSE Leap ${VERSION}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 VERSION="15.5"
 URL="https://mirrors.ustc.edu.cn/opensuse/distribution/leap/${VERSION}/appliances/"
-FILE="opensuse-leap-dnf-image.x86_64-lxc-dnf.tar.xz"
+FILE="opensuse-leap-dnf-image.${ARCH}-lxc-dnf.tar.xz"
 export IS_DNF=1
-
-if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/suse/leap/15.5/dnf_sh/zh_CN.sh
-else
-    . ${DIR}/i18n/scripts/fetch/suse/leap/15.5/dnf_sh/en_US.sh
-fi
 
 echo ""
 ${DIR}/scripts/check.sh

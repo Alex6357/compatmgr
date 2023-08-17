@@ -11,6 +11,11 @@ else
     . ${DIR}/i18n/scripts/fetch/deepin/20/bootstrap_sh/en_US.sh
 fi
 
+if [ ${MACHINE_ARCH} = "arm64" ]; then
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+fi
+
 echo ""
 ${DIR}/scripts/check.sh
 echo ""
@@ -96,7 +101,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap --exclude=usr-is-merged,debian-archive-keyring --include=deepin-keyring apricot ${INSTALL_DIR} https://community-packages.deepin.com/deepin/
+debootstrap --exclude=usr-is-merged,debian-archive-keyring --include=deepin-keyring --arch=${MACHINE_ARCH} apricot ${INSTALL_DIR} https://community-packages.deepin.com/deepin/
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then

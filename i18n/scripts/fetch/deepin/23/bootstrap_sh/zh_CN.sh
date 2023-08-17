@@ -2,6 +2,9 @@
 
 tr () {
     case ${1} in
+    "ARCH_NOT_SUPPORTED")
+        echo "Deepin does not support ARM64"
+        ;;
     "INSTALL_DEBOOTSTRAP_OR_NOT")
         echo "debootstrap未安装。是否现在安装？"
         ;;

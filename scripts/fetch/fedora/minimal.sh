@@ -1,5 +1,24 @@
 #!/bin/sh
 
+if echo ${LANG} | grep -q "^zh_CN"; then
+    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/zh_CN.sh
+else
+    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/en_US.sh
+fi
+
+case ${MACHINE_ARCH} in
+amd64)
+    ARCH="x86_64"
+    ;;
+arm64)
+    ARCH="aarch64"
+    ;;
+i386)
+    echo $(tr ARCH_NOT_SUPPORTED)
+    exit 1
+    ;;
+esac
+
 SUB_VERSION="1.6"
 VERSION="38"
 TYPE="Minimal-Base"
@@ -7,15 +26,9 @@ export DIST_NAME="fedora"
 export DIST_FULLNAME="Fedora ${VERSION} ${TYPE}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-FILE=Fedora-Container-${TYPE}-${VERSION}-${SUB_VERSION}.x86_64.tar.xz
-URL=https://mirrors.ustc.edu.cn/fedora/releases/${VERSION}/Container/x86_64/images/${FILE}
+FILE=Fedora-Container-${TYPE}-${VERSION}-${SUB_VERSION}.${ARCH}.tar.xz
+URL=https://mirrors.ustc.edu.cn/fedora/releases/${VERSION}/Container/${ARCH}/images/${FILE}
 export IS_MINIMAL=1
-
-if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/zh_CN.sh
-else
-    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/en_US.sh
-fi
 
 echo ""
 ${DIR}/scripts/check.sh

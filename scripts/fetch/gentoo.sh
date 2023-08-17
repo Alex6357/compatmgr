@@ -5,7 +5,7 @@ export DIST_FULLNAME="Gentoo ${NAME}"
 DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 FILE=${TYPE#*/}
-URL=https://mirrors.ustc.edu.cn/gentoo/releases/amd64/autobuilds/${TYPE}
+URL=https://mirrors.ustc.edu.cn/gentoo/releases/${ARCH}/autobuilds/${TYPE}
 
 if echo ${LANG} | grep -q "^zh_CN"; then
     . ${DIR}/i18n/scripts/fetch/gentoo_sh/zh_CN.sh

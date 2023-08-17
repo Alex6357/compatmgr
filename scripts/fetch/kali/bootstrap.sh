@@ -96,7 +96,7 @@ echo ""
 echo $(tr NOTICE_INSTALL_DIR)
 echo ""
 
-debootstrap --exclude=usr-is-merged --include=usrmerge kali-rolling ${INSTALL_DIR} https://mirrors.ustc.edu.cn/kali
+debootstrap --exclude=usr-is-merged --include=usrmerge --arch=${MACHINE_ARCH} kali-rolling ${INSTALL_DIR} https://mirrors.ustc.edu.cn/kali
 
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
