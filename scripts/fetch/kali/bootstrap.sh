@@ -8,9 +8,9 @@ YEAR="2023"
 NUMBER="2a"
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/kali/bootstrap_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/kali/bootstrap_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 echo ""

@@ -8,9 +8,9 @@ FILE=${TYPE#*/}
 URL=https://mirrors.ustc.edu.cn/gentoo/releases/${ARCH}/autobuilds/${TYPE}
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/gentoo_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/gentoo_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 echo ""

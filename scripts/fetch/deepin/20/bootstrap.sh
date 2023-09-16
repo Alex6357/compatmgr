@@ -6,13 +6,13 @@ DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/deepin/20/bootstrap_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/deepin/20/bootstrap_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 if [ ${MACHINE_ARCH} = "arm64" ]; then
-    echo $(trans ARCH_NOT_SUPPORTED)
+    echo $(trans DEEPIN_ARCH_NOT_SUPPORTED)
     exit 1
 fi
 

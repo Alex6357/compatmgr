@@ -1,13 +1,13 @@
 #!/bin/sh
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/fetch_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 if [ ${MACHINE_ARCH} = "i386" ]; then
-    echo $(trans ARCH_NOT_SUPPORTED_FETCH)
+    echo $(trans UBUNTU_ARCH_NOT_SUPPORTED_FETCH)
     exit 1
 fi
 

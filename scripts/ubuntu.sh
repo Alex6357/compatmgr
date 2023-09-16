@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/ubuntu_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/ubuntu_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 while true; do
@@ -28,7 +28,7 @@ while true; do
             echo "$(trans INSTALLING)Ubuntu 22.04 (jammy)"
             echo $(trans CHOOSE_INSTALL_METHORD)
             echo "1) $(trans METHORD_BOOTSTRAP)"
-            echo "2) $(trans METHORD_PREBUILT)"
+            echo "2) $(trans METHORD_UBUNTU_PREBUILT)"
             echo "3) $(trans RETURN)"
             echo -n $(trans REQUIRE_CHOICE)
 
@@ -65,7 +65,7 @@ while true; do
             echo "$(trans INSTALLING)Ubuntu 20.04 (focal)"
             echo $(trans CHOOSE_INSTALL_METHORD)
             echo "1) $(trans METHORD_BOOTSTRAP)"
-            echo "2) $(trans METHORD_PREBUILT)"
+            echo "2) $(trans METHORD_UBUNTU_PREBUILT)"
             echo "3) $(trans RETURN)"
             echo -n $(trans REQUIRE_CHOICE)
 

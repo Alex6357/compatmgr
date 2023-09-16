@@ -17,9 +17,9 @@ SUB_VERSION=".5"
 VERSION="20.04"
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/bootstrap_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/ubuntu/2004/bootstrap_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 echo ""

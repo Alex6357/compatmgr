@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/setup/kali/setup_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/setup/kali/setup_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 ${DIR}/scripts/setup/basic.sh
@@ -13,7 +13,7 @@ while true; do
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(trans SOURCE_NOT_ADDED)
+        echo $(trans KALI_SOURCE_NOT_ADDED)
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")

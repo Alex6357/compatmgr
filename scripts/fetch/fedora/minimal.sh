@@ -1,9 +1,9 @@
 #!/bin/sh
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/fedora/base_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 case ${MACHINE_ARCH} in
@@ -14,7 +14,7 @@ arm64)
     ARCH="aarch64"
     ;;
 i386)
-    echo $(trans ARCH_NOT_SUPPORTED)
+    echo $(trans FEDORA_ARCH_NOT_SUPPORTED)
     exit 1
     ;;
 esac

@@ -6,9 +6,9 @@ DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
 
 if echo ${LANG} | grep -q "^zh_CN"; then
-    . ${DIR}/i18n/scripts/fetch/debian/12/bootstrap_sh/zh_CN.sh
+    . ${DIR}/i18n/zh_CN.sh
 else
-    . ${DIR}/i18n/scripts/fetch/debian/12/bootstrap_sh/en_US.sh
+    . ${DIR}/i18n/en_US.sh
 fi
 
 echo ""
@@ -99,7 +99,7 @@ debootstrap --exclude=usr-is-merged --include=usrmerge --arch=${MACHINE_ARCH} bo
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
-    echo $(trans INSTALL_FAILED)
+    echo $(trans INSTALL_DEBOOTSTRAP_FAILED)
     exit ${STATUS}
 else
     echo $(trans INSTALL_COMPLETE)
