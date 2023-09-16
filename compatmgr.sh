@@ -9,7 +9,7 @@ else
 fi
 
 if [ ! "`whoami`" = "root" ]; then
-    echo $(tr NOT_RUN_BY_ROOT)
+    echo $(trans NOT_RUN_BY_ROOT)
     exit 1
 fi
 
@@ -24,7 +24,7 @@ i386)
     MACHINE_ARCH=i386
     ;;
 *)
-    echo $(tr ARCH_NOT_SUPPORTED)
+    echo $(trans ARCH_NOT_SUPPORTED)
     exit 1
     ;;
 esac
@@ -34,13 +34,13 @@ export MACHINE_ARCH
 while true; do
     export BACK_TO_MENU=0
     echo ""
-    echo $(tr WELCOME)
-    echo $(tr PLEASE_SELECT)
-    echo "1) $(tr CHOICE_CHECK)"
-    echo "2) $(tr CHOICE_INSTALL)"
-    # echo "3) $(tr CHOICE_REMOVE)"
-    echo "4) $(tr CHOICE_EXIT)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo $(trans WELCOME)
+    echo $(trans PLEASE_SELECT)
+    echo "1) $(trans CHOICE_CHECK)"
+    echo "2) $(trans CHOICE_INSTALL)"
+    echo "3) $(trans CHOICE_REMOVE)"
+    echo "4) $(trans CHOICE_EXIT)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in
@@ -51,23 +51,23 @@ while true; do
         case ${STATUS} in
         0)
             echo ""
-            echo $(tr CHECK_SUCCESS)
+            echo $(trans CHECK_SUCCESS)
             ;;
         1)
             echo ""
-            echo $(tr CHECK_FAILED_LINUX_NOT_STARTED)
+            echo $(trans CHECK_FAILED_LINUX_NOT_STARTED)
             ;;
         2)
             echo ""
-            echo $(tr CHECK_FAILED_DBUS_NOT_INSTALLED)
+            echo $(trans CHECK_FAILED_DBUS_NOT_INSTALLED)
             ;;
         3)
             echo ""
-            echo $(tr CHECK_FAILED_DBUS_NOT_STARTED)
+            echo $(trans CHECK_FAILED_DBUS_NOT_STARTED)
             ;;
         4)
             echo ""
-            echo $(tr CHEKC_FAILED_NULLFS_NOT_LOADED)
+            echo $(trans CHEKC_FAILED_NULLFS_NOT_LOADED)
             ;;
         esac
         ;;
@@ -77,7 +77,7 @@ while true; do
                 break
             fi
             echo ""
-            echo $(tr INSTALL_SELECT)
+            echo $(trans INSTALL_SELECT)
             echo "1) Debian"
             echo "2) Ubuntu"
             echo "3) Kali"
@@ -86,8 +86,8 @@ while true; do
             echo "6) openSUSE"
             echo "7) Gentoo"
             echo "8) Arch Linux"
-            echo "9) $(tr CHOICE_RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "9) $(trans CHOICE_RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in
@@ -155,32 +155,11 @@ while true; do
             esac
         done
         ;;
-    # 3)
-    #     while true; do
-    #         if [ ${BACK_TO_MENU} -eq 1 ]; then
-    #             break
-    #         fi
-    #         echo ""
-    #         echo $(tr REMOVE_SELECT)
-    #         echo "1) Debian"
-    #         echo "2) $(tr CHOICE_RETURN)"
-    #         echo -n $(tr REQUIRE_CHOICE)
-    #         read CHOICE
-
-    #         case ${CHOICE} in
-    #         1)
-    #             ${DIR}/scripts/remove/debian.sh
-    #             ;;
-    #         2)
-    #             break
-    #             ;;
-    #         *)
-    #             ;;
-    #         esac
-    #     done
-    #     ;;
+    3)
+        ${DIR}/scripts/remove.sh
+        ;;
     4)
-        echo $(tr GOODBYE)
+        echo $(trans GOODBYE)
         exit 0
         ;;
     *)
