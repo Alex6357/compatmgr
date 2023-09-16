@@ -11,11 +11,11 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_DEBIAN_VERSION)
+    echo $(trans CHOOSE_DEBIAN_VERSION)
     echo "1) 12 (bookworm)"
     echo "2) 11 (bullseye)"
-    echo "3) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "3) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in
@@ -25,12 +25,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)Debian 12 (bookworm)"
-            echo $(tr CHOOSE_INSTALL_METHORD)
-            echo "1) $(tr METHORD_BOOTSTRAP)"
-            # echo "2) $(tr METHORD_PREBUILT)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)Debian 12 (bookworm)"
+            echo $(trans CHOOSE_INSTALL_METHORD)
+            echo "1) $(trans METHORD_BOOTSTRAP)"
+            # echo "2) $(trans METHORD_PREBUILT)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in
@@ -59,12 +59,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)Debian 11 (bullseye)"
-            echo $(tr CHOOSE_INSTALL_METHORD)
-            echo "1) $(tr METHORD_BOOTSTRAP)"
-            # echo "2) $(tr METHORD_PREBUILT)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)Debian 11 (bullseye)"
+            echo $(trans CHOOSE_INSTALL_METHORD)
+            echo "1) $(trans METHORD_BOOTSTRAP)"
+            # echo "2) $(trans METHORD_PREBUILT)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in

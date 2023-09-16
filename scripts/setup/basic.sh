@@ -7,17 +7,17 @@ else
 fi
 
 while true; do
-    echo -n "$(tr USE_ALI_DNS_OR_NOT)[Y|n]: "
+    echo -n "$(trans USE_ALI_DNS_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(tr USE_LOCAL_DNS)
+        echo $(trans USE_LOCAL_DNS)
         cp -f /etc/resolv.conf ${INSTALL_DIR}/etc/resolv.conf
         grep nameserver ${INSTALL_DIR}/etc/resolv.conf
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr USE_ALI_DNS)
+        echo $(trans USE_ALI_DNS)
         echo "nameserver 223.5.5.5" > ${INSTALL_DIR}/etc/resolv.conf
         break
         ;;
@@ -27,17 +27,17 @@ while true; do
 done
 
 while true; do
-    echo -n "$(tr ADD_FSTAB_OR_NOT)[Y|n]: "
+    echo -n "$(trans ADD_FSTAB_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(tr WARN_MOUNT_MANUALLY)
+        echo $(trans WARN_MOUNT_MANUALLY)
         while true; do
-            echo -n "$(tr CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]: "
+            echo -n "$(trans CONTINUE_WITHOUT_FSTAB_ADDED)[y|N]: "
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss]|[Yy])
-                echo $(tr WARN_FSTAB_NOT_ADDED)
+                echo $(trans WARN_FSTAB_NOT_ADDED)
                 echo "devfs	${INSTALL_DIR}/dev	devfs	rw,late	0	0"
                 echo "tmpfs	${INSTALL_DIR}/dev/shm	tmpfs	rw,late,size=1g,mode=1777	0	0"
                 echo "fdescfs	${INSTALL_DIR}/dev/fd	fdescfs	rw,late,linrdlnk	0	0"
@@ -48,7 +48,7 @@ while true; do
                 break
                 ;;
             [Nn][Oo]|[Nn]|"")
-                echo $(tr ADD_FSTAB)
+                echo $(trans ADD_FSTAB)
                 echo "devfs	${INSTALL_DIR}/dev	devfs	rw,late	0	0" >> /etc/fstab
                 echo "tmpfs	${INSTALL_DIR}/dev/shm	tmpfs	rw,late,size=1g,mode=1777	0	0" >> /etc/fstab
                 echo "fdescfs	${INSTALL_DIR}/dev/fd	fdescfs	rw,late,linrdlnk	0	0" >> /etc/fstab
@@ -66,7 +66,7 @@ while true; do
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr ADD_FSTAB)
+        echo $(trans ADD_FSTAB)
         echo "devfs	${INSTALL_DIR}/dev	devfs	rw,late	0	0" >> /etc/fstab
         echo "tmpfs	${INSTALL_DIR}/dev/shm	tmpfs	rw,late,size=1g,mode=1777	0	0" >> /etc/fstab
         echo "fdescfs	${INSTALL_DIR}/dev/fd	fdescfs	rw,late,linrdlnk	0	0" >> /etc/fstab

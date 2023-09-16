@@ -11,24 +11,24 @@ ${IS_FETCH:-0}
 ${DIR}/scripts/setup/basic.sh
 
 if [ ${IS_FETCH} -eq 1 ]; then
-    echo $(tr ADD_APT_CACHE)
+    echo $(trans ADD_APT_CACHE)
     echo "APT::Cache-Start 110663296;" >> ${INSTALL_DIR}/etc/apt/apt.conf.d/01addcache
 fi
 
 while true; do
-    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]: "
+    echo -n "$(trans ADD_SOURCE_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
         if [ ${IS_FETCH} -eq 1 ]; then
-            echo $(tr SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
+            echo $(trans SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
         else
-            echo $(tr SOURCE_NOT_ADDED_MAIN_ONLY)
+            echo $(trans SOURCE_NOT_ADDED_MAIN_ONLY)
         fi
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr ADD_SOURCE)
+        echo $(trans ADD_SOURCE)
         cat >${INSTALL_DIR}/etc/apt/sources.list<< EOF
 deb http://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
 deb-src http://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
@@ -53,17 +53,17 @@ EOF
             sed -i '' 's/http/https/g' ${INSTALL_DIR}/etc/apt/sources.list
         else
             while true; do
-                echo -n "$(tr USE_HTTPS_SOURCES_OR_NOT)[Y|n]: "
+                echo -n "$(trans USE_HTTPS_SOURCES_OR_NOT)[Y|n]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy]|"")
-                    echo $(tr USE_HTTPS_SOURCES)
+                    echo $(trans USE_HTTPS_SOURCES)
                     chroot ${INSTALL_DIR} /bin/bash -c "apt update && apt install -y ca-certificates"
                     sed -i '' 's/http/https/g' ${INSTALL_DIR}/etc/apt/sources.list
                     break
                     ;;
                 [Nn][Oo]|[Nn])
-                    echo $(tr HTTPS_SOURCES_NOT_USED)
+                    echo $(trans HTTPS_SOURCES_NOT_USED)
                     break
                     ;;
                 *)
@@ -80,16 +80,16 @@ done
 
 if [ ${IS_FETCH} -eq 1 ]; then
     while true; do
-        echo -n "$(tr INSTALL_VIM_OR_NOT)[Y|n]: "
+        echo -n "$(trans INSTALL_VIM_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr INSTALL_VIM)
+            echo $(trans INSTALL_VIM)
             chroot ${INSTALL_DIR} /bin/bash -c "apt update && apt install -y vim"
             break
             ;;
         [Nn][Oo]|[Nn])
-            echo $(tr NOTICE_NO_EDITOR)
+            echo $(trans NOTICE_NO_EDITOR)
             break
             ;;
         *)
@@ -98,7 +98,7 @@ if [ ${IS_FETCH} -eq 1 ]; then
     done
 fi
 
-echo $(tr SETUP_COMPLETE)
-echo $(tr NOTICE_COMMAND)
+echo $(trans SETUP_COMPLETE)
+echo $(trans NOTICE_COMMAND)
 
 exit 0

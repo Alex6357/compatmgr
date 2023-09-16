@@ -11,11 +11,11 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_FEDORA_TYPE)
+    echo $(trans CHOOSE_FEDORA_TYPE)
     echo "1) Base"
-    echo "2) Minimal Base $(tr MINIMAL_NOT_RECOMMENDED)"
-    echo "3) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "2) Minimal Base $(trans MINIMAL_NOT_RECOMMENDED)"
+    echo "3) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in

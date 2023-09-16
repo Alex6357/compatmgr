@@ -11,11 +11,11 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_SUSE_VERSION)
+    echo $(trans CHOOSE_SUSE_VERSION)
     echo "1) Leap 15.5"
     echo "2) Tumbleweed"
-    echo "3) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "3) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in
@@ -25,12 +25,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)openSUSE Leap 15.5"
-            echo $(tr CHOOSE_INSTALL_TYPE)
-            echo "1) $(tr TYPE_ZYPPER)"
-            echo "2) $(tr TYPE_DNF)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)openSUSE Leap 15.5"
+            echo $(trans CHOOSE_INSTALL_TYPE)
+            echo "1) $(trans TYPE_ZYPPER)"
+            echo "2) $(trans TYPE_DNF)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in
@@ -62,12 +62,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)openSUSE Tunbleweed"
-            echo $(tr CHOOSE_INSTALL_TYPE)
-            echo "1) $(tr TYPE_ZYPPER)"
-            echo "2) $(tr TYPE_DNF)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)openSUSE Tunbleweed"
+            echo $(trans CHOOSE_INSTALL_TYPE)
+            echo "1) $(trans TYPE_ZYPPER)"
+            echo "2) $(trans TYPE_DNF)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in

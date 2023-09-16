@@ -6,25 +6,25 @@ else
     . ${DIR}/i18n/scripts/check_sh/en_US.sh
 fi
 
-echo $(tr CHECK_START)
+echo $(trans CHECK_START)
 
 if [ ! "`sysrc -n linux_enable`" = "YES" ]; then
     while true; do
-        echo -n "$(tr ENABLE_LINUX_OR_NOT)[Y|n]: "
+        echo -n "$(trans ENABLE_LINUX_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr WARN_START_LINUX)
+            echo $(trans WARN_START_LINUX)
             while true; do
-                echo -n "$(tr CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]: "
+                echo -n "$(trans CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
-                    echo $(tr WARN_LINUX_NOT_ENABLED)
+                    echo $(trans WARN_LINUX_NOT_ENABLED)
                     break
                     ;;
                 [Nn][Oo]|[Nn]|"")
-                    echo $(tr ENABLE_LINUX)
+                    echo $(trans ENABLE_LINUX)
                     sysrc linux_enable=YES
                     break
                     ;;
@@ -35,7 +35,7 @@ if [ ! "`sysrc -n linux_enable`" = "YES" ]; then
             break
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr ENABLE_LINUX)
+            echo $(trans ENABLE_LINUX)
             sysrc linux_enable=YES
             break
             ;;
@@ -71,15 +71,15 @@ fi
 
 if [ ${LINUX_ENABLED} = 0 ]; then
     while true; do
-        echo -n "$(tr START_LINUX_OR_NOT)[Y|n]: "
+        echo -n "$(trans START_LINUX_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr ABORT_LINUX_NOT_START)
+            echo $(trans ABORT_LINUX_NOT_START)
             exit 1
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr START_LINUX)
+            echo $(trans START_LINUX)
             service linux onestart
             break
             ;;
@@ -92,15 +92,15 @@ fi
 
 if ! which -s dbus-daemon; then
     while true; do
-        echo -n "$(tr INSTALL_DBUS_OR_NOT)[Y|n]: "
+        echo -n "$(trans INSTALL_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr ABORT_DBUS_NOT_INSTALLED)
+            echo $(trans ABORT_DBUS_NOT_INSTALLED)
             exit 2
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr INSTALL_DBUS)
+            echo $(trans INSTALL_DBUS)
             pkg install -y dbus
             break
             ;;
@@ -113,21 +113,21 @@ fi
 
 if [ ! $(sysrc -n dbus_enable | grep [Yy][Ee][Ss]) ]; then
     while true; do
-        echo -n "$(tr ENABLE_DBUS_OR_NOT)[Y|n]: "
+        echo -n "$(trans ENABLE_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr WARN_START_DBUS)
+            echo $(trans WARN_START_DBUS)
             while true; do
-                echo -n "$(tr CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)[y|N]: "
+                echo -n "$(trans CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
-                    echo $(tr WARN_DBUS_NOT_ENABLED)
+                    echo $(trans WARN_DBUS_NOT_ENABLED)
                     break
                     ;;
                 [Nn][Oo]|[Nn]|"")
-                    echo $(tr ENABLE_DBUS)
+                    echo $(trans ENABLE_DBUS)
                     sysrc dbus_enable="YES"
                     break
                     ;;
@@ -138,7 +138,7 @@ if [ ! $(sysrc -n dbus_enable | grep [Yy][Ee][Ss]) ]; then
             break
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr ENABLE_DBUS)
+            echo $(trans ENABLE_DBUS)
             sysrc dbus_enable="YES"
             break
             ;;
@@ -150,15 +150,15 @@ fi
 
 if [ -z "`ps aux | grep -p dbus | grep -v grep`" ]; then
     while true; do
-        echo -n "$(tr START_DBUS_OR_NOT)[Y|n]: "
+        echo -n "$(trans START_DBUS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr ABORT_DBUS_NOT_START)
+            echo $(trans ABORT_DBUS_NOT_START)
             exit 3
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr START_DBUS)
+            echo $(trans START_DBUS)
             service dbus start
             break
             ;;
@@ -170,21 +170,21 @@ fi
 
 if [ ! "`sysrc -f /boot/loader.conf -qn nullfs_load`" = "YES" ]; then
     while true; do
-        echo -n "$(tr LOAD_NULLFS_OR_NOT)[Y|n]: "
+        echo -n "$(trans LOAD_NULLFS_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr WARN_LOAD_NULLFS)
+            echo $(trans WARN_LOAD_NULLFS)
             while true; do
-                echo -n "$(tr CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]: "
+                echo -n "$(trans CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss]|[Yy])
-                    echo $(tr WARN_NULLFS_NOT_LOADED)
+                    echo $(trans WARN_NULLFS_NOT_LOADED)
                     break
                     ;;
                 [Nn][Oo]|[Nn]|"")
-                    echo $(tr LOAD_NULLFS)
+                    echo $(trans LOAD_NULLFS)
                     sysrc -f /boot/loader.conf nullfs_load="YES"
                     break
                     ;;
@@ -195,7 +195,7 @@ if [ ! "`sysrc -f /boot/loader.conf -qn nullfs_load`" = "YES" ]; then
             break
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr LOAD_NULLFS)
+            echo $(trans LOAD_NULLFS)
             sysrc -f /boot/loader.conf nullfs_load="YES"
             break
             ;;
@@ -208,15 +208,15 @@ fi
 
 if [ -z "`kldstat -n nullfs`" ]; then
     while true; do
-        echo -n "$(tr LOAD_NULLFS_MODULE_OR_NOT)[Y|n]: "
+        echo -n "$(trans LOAD_NULLFS_MODULE_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr ABORT_NULLFS_MODULE_NOT_LOADED)
+            echo $(trans ABORT_NULLFS_MODULE_NOT_LOADED)
             exit 4
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr LOAD_NULLFS_MODULE)
+            echo $(trans LOAD_NULLFS_MODULE)
             kldload -v nullfs
             break
             ;;

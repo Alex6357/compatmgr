@@ -17,15 +17,15 @@ echo ""
 
 if ! which -s debootstrap; then
     while true; do
-        echo -n "$(tr INSTALL_DEBOOTSTRAP_OR_NOT)[Y|n]: "
+        echo -n "$(trans INSTALL_DEBOOTSTRAP_OR_NOT)[Y|n]: "
         read ANSWER
         case ${ANSWER} in
         [Nn][Oo]|[Nn])
-            echo $(tr INSTALL_FAILED_DEBOOTSTRAP_NOT_INSTALLED)
+            echo $(trans INSTALL_FAILED_DEBOOTSTRAP_NOT_INSTALLED)
             exit 1;
             ;;
         [Yy][Ee][Ss]|[Yy]|"")
-            echo $(tr INSTALL_DEBOOTSTRAP)
+            echo $(trans INSTALL_DEBOOTSTRAP)
             pkg install -y debootstrap
             break
             ;;
@@ -38,7 +38,7 @@ fi
 while true; do
     while true; do
         INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-        echo -n "$(tr CHANGE_INSTALL_DIR_OR_NOT)[${INSTALL_DIR}]: "
+        echo -n "$(trans CHANGE_INSTALL_DIR_OR_NOT)[${INSTALL_DIR}]: "
         read ANSWER
         if [ -z ${ANSWER} ]; then
             break
@@ -46,7 +46,7 @@ while true; do
             USER_INSTALL_DIR=${ANSWER}
         fi
         while true; do
-            echo -n "$(tr CONFIRM_INSTALL_DIR_OR_NOT)(${USER_INSTALL_DIR})[yes|NO]: "
+            echo -n "$(trans CONFIRM_INSTALL_DIR_OR_NOT)(${USER_INSTALL_DIR})[yes|NO]: "
             read ANSWER
             case ${ANSWER} in
             [Yy][Ee][Ss])
@@ -66,7 +66,7 @@ while true; do
         if [ "$(ls -A ${INSTALL_DIR})" ]; then
             FORCE_INSTALL=0
             while true; do
-                echo -n "$(tr WARN_DIR_NOT_EMPTY)(${INSTALL_DIR})[yes|NO]: "
+                echo -n "$(trans WARN_DIR_NOT_EMPTY)(${INSTALL_DIR})[yes|NO]: "
                 read ANSWER
                 case ${ANSWER} in
                 [Yy][Ee][Ss])
@@ -91,7 +91,7 @@ while true; do
 done
 
 echo ""
-echo $(tr NOTICE_INSTALL_DIR)
+echo $(trans NOTICE_INSTALL_DIR)
 echo ""
 
 debootstrap --exclude=usr-is-merged --include=usrmerge --arch=${MACHINE_ARCH} bookworm ${INSTALL_DIR} https://mirrors.ustc.edu.cn/debian
@@ -99,14 +99,14 @@ debootstrap --exclude=usr-is-merged --include=usrmerge --arch=${MACHINE_ARCH} bo
 STATUS=${?}
 if [ ${STATUS} -ne 0 ]; then
     export STATUS
-    echo $(tr INSTALL_FAILED)
+    echo $(trans INSTALL_FAILED)
     exit ${STATUS}
 else
-    echo $(tr INSTALL_COMPLETE)
-    echo $(tr REMOVE_DEBOOTSTRAP_FILES)
+    echo $(trans INSTALL_COMPLETE)
+    echo $(trans REMOVE_DEBOOTSTRAP_FILES)
     rm -rf ${INSTALL_DIR}/debootstrap
     echo ""
-    echo $(tr SETTING_UP)
+    echo $(trans SETTING_UP)
     echo ""
     ${DIR}/scripts/setup/debian/12/setup.sh
 fi

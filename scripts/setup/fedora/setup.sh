@@ -11,15 +11,15 @@ IS_MINIMAL=${IS_MINIMAL:-0}
 ${DIR}/scripts/setup/basic.sh
 
 while true; do
-    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]: "
+    echo -n "$(trans ADD_SOURCE_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(tr SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
+        echo $(trans SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr ADD_SOURCE)
+        echo $(trans ADD_SOURCE)
         if [ ${IS_MINIMAL} -eq 1 ]; then
             sed -e 's|^metalink=|#metalink=|g' \
             -e 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl=https://mirrors.ustc.edu.cn/fedora|g' \
@@ -42,7 +42,7 @@ while true; do
     esac
 done
 
-echo $(tr SETUP_COMPLETE)
-echo $(tr NOTICE_COMMAND)
+echo $(trans SETUP_COMPLETE)
+echo $(trans NOTICE_COMMAND)
 
 exit 0

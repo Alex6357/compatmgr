@@ -9,15 +9,15 @@ fi
 ${DIR}/scripts/setup/basic.sh
 
 while true; do
-    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]: "
+    echo -n "$(trans ADD_SOURCE_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(tr SOURCE_NOT_ADDED)
+        echo $(trans SOURCE_NOT_ADDED)
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr ADD_SOURCE)
+        echo $(trans ADD_SOURCE)
         cat >${INSTALL_DIR}/etc/apt/sources.list<< EOF
 deb https://mirrors.ustc.edu.cn/debian bullseye main contrib non-free
 deb-src https://mirrors.ustc.edu.cn/debian bullseye main contrib non-free
@@ -38,7 +38,7 @@ EOF
     esac
 done
 
-echo $(tr SETUP_COMPLETE)
-echo $(tr NOTICE_COMMAND)
+echo $(trans SETUP_COMPLETE)
+echo $(trans NOTICE_COMMAND)
 
 exit 0

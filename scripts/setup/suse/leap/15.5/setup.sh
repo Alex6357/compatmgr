@@ -11,15 +11,15 @@ IS_MINIMAL=${IS_MINIMAL:-0}
 ${DIR}/scripts/setup/basic.sh
 
 while true; do
-    echo -n "$(tr ADD_SOURCE_OR_NOT)[Y|n]: "
+    echo -n "$(trans ADD_SOURCE_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Nn][Oo]|[Nn])
-        echo $(tr SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
+        echo $(trans SOURCE_NOT_ADDED_OFFICIAL_AVALIABLE)
         break
         ;;
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr ADD_SOURCE)
+        echo $(trans ADD_SOURCE)
         if [ ${IS_DNF} -eq 0 ]; then
             chroot ${INSTALL_DIR} /bin/bash -c "zypper mr -da && zypper mr -e repo-openh264"
             chroot ${INSTALL_DIR} /bin/bash -c "zypper ar -fcg https://mirrors.ustc.edu.cn/opensuse/distribution/leap/\\\$releasever/repo/oss USTC:OSS"
@@ -46,18 +46,18 @@ while true; do
 done
 
 if [ ${IS_DNF} -eq 0 ];then
-    echo $(tr REPLACE_RPM_NDB)
+    echo $(trans REPLACE_RPM_NDB)
     chroot ${INSTALL_DIR} /bin/bash -c "zypper download rpm"
     chroot ${INSTALL_DIR} /bin/bash -c "find /var/cache/zypp/packages -name "rpm-*.rpm" -exec rpm -ivh --force --nodeps {} \\;"
     chroot ${INSTALL_DIR} /bin/bash -c "rpm --rebuilddb"
 fi
 
 while true; do
-    echo -n "$(tr INSTALL_VIM_OR_NOT)[Y|n]: "
+    echo -n "$(trans INSTALL_VIM_OR_NOT)[Y|n]: "
     read ANSWER
     case ${ANSWER} in
     [Yy][Ee][Ss]|[Yy]|"")
-        echo $(tr INSTALL_VIM)
+        echo $(trans INSTALL_VIM)
         if [ ${IS_DNF} -eq 0 ]; then
             chroot ${INSTALL_DIR} /bin/bash -c "zypper ref && zypper in vim"
         else
@@ -66,7 +66,7 @@ while true; do
         break
         ;;
     [Nn][Oo]|[Nn])
-        echo $(tr NOTICE_NO_EDITOR)
+        echo $(trans NOTICE_NO_EDITOR)
         break
         ;;
     *)
@@ -74,7 +74,7 @@ while true; do
     esac
 done
 
-echo $(tr SETUP_COMPLETE)
-echo $(tr NOTICE_COMMAND)
+echo $(trans SETUP_COMPLETE)
+echo $(trans NOTICE_COMMAND)
 
 exit 0

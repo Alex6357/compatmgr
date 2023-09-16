@@ -8,7 +8,7 @@ fi
 
 ${DIR}/scripts/setup/basic.sh
 
-echo $(tr SETUP_COMPLETE)
-echo $(tr NOTICE_COMMAND)
+echo $(trans SETUP_COMPLETE)
+echo $(trans NOTICE_COMMAND)
 
 exit 0

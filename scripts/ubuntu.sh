@@ -11,11 +11,11 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_UBUNTU_VERSION)
+    echo $(trans CHOOSE_UBUNTU_VERSION)
     echo "1) 22.04 (jammy)"
     echo "2) 20.04 (focal)"
-    echo "3) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "3) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in
@@ -25,12 +25,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)Ubuntu 22.04 (jammy)"
-            echo $(tr CHOOSE_INSTALL_METHORD)
-            echo "1) $(tr METHORD_BOOTSTRAP)"
-            echo "2) $(tr METHORD_PREBUILT)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)Ubuntu 22.04 (jammy)"
+            echo $(trans CHOOSE_INSTALL_METHORD)
+            echo "1) $(trans METHORD_BOOTSTRAP)"
+            echo "2) $(trans METHORD_PREBUILT)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in
@@ -62,12 +62,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)Ubuntu 20.04 (focal)"
-            echo $(tr CHOOSE_INSTALL_METHORD)
-            echo "1) $(tr METHORD_BOOTSTRAP)"
-            echo "2) $(tr METHORD_PREBUILT)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)Ubuntu 20.04 (focal)"
+            echo $(trans CHOOSE_INSTALL_METHORD)
+            echo "1) $(trans METHORD_BOOTSTRAP)"
+            echo "2) $(trans METHORD_PREBUILT)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in

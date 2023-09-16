@@ -41,15 +41,15 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_GENTOO_TYPE)
+    echo $(trans CHOOSE_GENTOO_TYPE)
     COUNT=0
     for TYPE in ${gentoo_list}; do
         COUNT=$((COUNT+1))
         NAME=${TYPE#*amd64-}
         echo "${COUNT}) ${NAME%-*}"
     done
-    echo "r) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "r) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in

@@ -11,11 +11,11 @@ while true; do
         break
     fi
     echo ""
-    echo $(tr CHOOSE_DEEPIN_VERSION)
+    echo $(trans CHOOSE_DEEPIN_VERSION)
     # echo "1) 20 (apricot)"
     echo "2) 23 (beige) (beta)"
-    echo "3) $(tr RETURN)"
-    echo -n $(tr REQUIRE_CHOICE)
+    echo "3) $(trans RETURN)"
+    echo -n $(trans REQUIRE_CHOICE)
 
     read CHOICE
     case ${CHOICE} in
@@ -25,12 +25,12 @@ while true; do
     #             break
     #         fi
     #         echo ""
-    #         echo "$(tr INSTALLING)Deepin 20 (apricot)"
-    #         echo $(tr CHOOSE_INSTALL_METHORD)
-    #         echo "1) $(tr METHORD_BOOTSTRAP)"
-    #         # echo "2) $(tr METHORD_PREBUILT)"
-    #         echo "3) $(tr RETURN)"
-    #         echo -n $(tr REQUIRE_CHOICE)
+    #         echo "$(trans INSTALLING)Deepin 20 (apricot)"
+    #         echo $(trans CHOOSE_INSTALL_METHORD)
+    #         echo "1) $(trans METHORD_BOOTSTRAP)"
+    #         # echo "2) $(trans METHORD_PREBUILT)"
+    #         echo "3) $(trans RETURN)"
+    #         echo -n $(trans REQUIRE_CHOICE)
 
     #         read CHOICE
     #         case ${CHOICE} in
@@ -59,12 +59,12 @@ while true; do
                 break
             fi
             echo ""
-            echo "$(tr INSTALLING)Deepin 23 (beige) (beta)"
-            echo $(tr CHOOSE_INSTALL_METHORD)
-            echo "1) $(tr METHORD_BOOTSTRAP)"
-            # echo "2) $(tr METHORD_PREBUILT)"
-            echo "3) $(tr RETURN)"
-            echo -n $(tr REQUIRE_CHOICE)
+            echo "$(trans INSTALLING)Deepin 23 (beige) (beta)"
+            echo $(trans CHOOSE_INSTALL_METHORD)
+            echo "1) $(trans METHORD_BOOTSTRAP)"
+            # echo "2) $(trans METHORD_PREBUILT)"
+            echo "3) $(trans RETURN)"
+            echo -n $(trans REQUIRE_CHOICE)
 
             read CHOICE
             case ${CHOICE} in
