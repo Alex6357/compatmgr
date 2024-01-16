@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tr () {
+trans () {
     case $1 in
     # compatmgr.sh
     "ARCH_NOT_SUPPORTED")

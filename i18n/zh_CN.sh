@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tr () {
+trans () {
     case $1 in
 
     # compatmgr.sh
