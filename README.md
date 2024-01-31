@@ -13,7 +13,6 @@
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
-- [x] Deepin 23 (beige)
 - [x] Fedora
 - [x] openSUSE Leap 15.5
 - [x] openSUSE Tumbleweed （存在一定问题）
@@ -21,8 +20,8 @@
 - [x] Arch Linux
 
 目前有问题的发行版：
-- [ ] Deepin 20 (apricot) --- debootstrap依赖解析存在问题
-
+- [ ] Deepin 20 (apricot)
+- [ ] Deepin 23 (beige)
 
 ## Linux compatitive layer manager for FreeBSD
 
@@ -38,7 +37,6 @@ Distributions avaliable:
 - [x] Ubuntu 22.04 (jammy)
 - [x] Ubuntu 20.04 (focal)
 - [x] Kali rolling
-- [x] Deepin 23 (beige)
 - [x] Fedora
 - [x] openSUSE Leap 15.5
 - [x] openSUSE Tumbleweed (have some problems)
@@ -46,4 +44,5 @@ Distributions avaliable:
 - [x] Arch Linux
 
 Distributions that have problems:
-- [ ] Deepin 20 (apricot) --- debootstrap dependency resolution issue
+- [ ] Deepin 20 (apricot)
+- [ ] Deepin 23 (beige)
