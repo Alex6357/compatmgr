@@ -4,8 +4,6 @@ export DIST_NAME="kali"
 export DIST_FULLNAME="Kali"
 export DEFAULT_INSTALL_DIR=/compat/${DIST_NAME}
 export INSTALL_DIR=${DEFAULT_INSTALL_DIR}
-YEAR="2023"
-NUMBER="2a"
 
 if echo ${LANG} | grep -q "^zh_CN"; then
     . ${DIR}/i18n/zh_CN.sh

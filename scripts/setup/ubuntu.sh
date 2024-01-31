@@ -14,7 +14,7 @@ fi
 
 case ${VERSION} in
 "22.04")
-    SUB_VERSION=".5"
+    SUB_VERSION=".3"
     CODENAME="jammy"
     ;;
 "20.04")
