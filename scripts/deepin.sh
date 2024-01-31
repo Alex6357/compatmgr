@@ -7,94 +7,125 @@ else
 fi
 
 while true; do
-    if [ ${BACK_TO_MENU} -eq 1 ]; then
-        break
-    fi
-    echo ""
-    echo $(trans CHOOSE_DEEPIN_VERSION)
-    # echo "1) 20 (apricot)"
-    echo "2) 23 (beige) (beta)"
-    echo "3) $(trans RETURN)"
-    echo -n $(trans REQUIRE_CHOICE)
 
-    read CHOICE
+    CHOICE=$(bsddialog --cancel-label "$(trans RETURN)" \
+             --ok-label "$(trans OK)" \
+             --menu "$(trans CHOOSE_DEEPIN_VERSION)" \
+             0 0 1 \
+             "Deepin 23" "Deepin beige (beta)" \
+             3>&2 2>&1 1>&3)
+    STATUS=${?}
+
+    case ${STATUS} in
+    1)
+        exit 5
+        ;;
+    0)
+        ;;
+    *)
+        exit 2
+        ;;
+    esac
+
     case ${CHOICE} in
-    # 1)
-    #     while true; do
-    #         if [ ${BACK_TO_MENU} -eq 1 ]; then
-    #             break
-    #         fi
-    #         echo ""
-    #         echo "$(trans INSTALLING)Deepin 20 (apricot)"
-    #         echo $(trans CHOOSE_INSTALL_METHORD)
-    #         echo "1) $(trans METHORD_BOOTSTRAP)"
-    #         # echo "2) $(trans METHORD_PREBUILT)"
-    #         echo "3) $(trans RETURN)"
-    #         echo -n $(trans REQUIRE_CHOICE)
-
-    #         read CHOICE
-    #         case ${CHOICE} in
-    #         1)
-    #             ${DIR}/scripts/fetch/deepin/20/bootstrap.sh
-    #             STATUS=${?}
-    #             if [ ${STATUS} -eq 9 ]; then
-    #                 BACK_TO_MENU=1
-    #             fi
-    #             ;;
-    #         # 2)
-    #         #     ${DIR}/scripts/fetch/deepin/20/fetch.sh
-    #         #     break
-    #         #     ;;
-    #         3)
-    #             break
-    #             ;;
-    #         *)
-    #             ;;
-    #         esac
-    #     done
-    #     ;;
-    2)
+    "Deepin 23")
         while true; do
-            if [ ${BACK_TO_MENU} -eq 1 ]; then
-                break
-            fi
-            echo ""
-            echo "$(trans INSTALLING)Deepin 23 (beige) (beta)"
-            echo $(trans CHOOSE_INSTALL_METHORD)
-            echo "1) $(trans METHORD_BOOTSTRAP)"
-            # echo "2) $(trans METHORD_PREBUILT)"
-            echo "3) $(trans RETURN)"
-            echo -n $(trans REQUIRE_CHOICE)
 
-            read CHOICE
-            case ${CHOICE} in
+            CHOICE=$(bsddialog --cancel-label "$(trans RETURN)" \
+                     --ok-label "$(trans OK)" \
+                     --hline "$(trans INSTALLING)Deepin 23 (beige) (beta)" \
+                     --menu "$(trans CHOOSE_INSTALL_METHORD)" \
+                     0 0 1 \
+                     "debootstrap" "$(trans METHORD_BOOTSTRAP)" \
+                     3>&2 2>&1 1>&3)
+            STATUS=${?}
+            case ${STATUS} in
             1)
-                ${DIR}/scripts/fetch/deepin/23/bootstrap.sh
-                STATUS=${?}
-                if [ ${STATUS} -eq 9 ]; then
-                    BACK_TO_MENU=1
-                fi
-                ;;
-            # 2)
-            #     ${DIR}/scripts/fetch/deepin/23/fetch.sh
-            #     break
-            #     ;;
-            3)
                 break
+                ;;
+            0)
                 ;;
             *)
+                exit 2
+                ;;
+            esac
+
+            case ${CHOICE} in
+            "debootstrap")
+                ${DIR}/scripts/fetch/deepin/23/bootstrap.sh
+                STATUS=${?}
+                case ${STATUS} in 
+                0)
+                    exit 0
+                    ;;
+                1)
+                    exit 2
+                    ;;
+                2)
+                    exit 3
+                    ;;
+                esac
+                ;;
+            # 2)
+            #     ${DIR}/scripts/fetch/debian/12/fetch.sh
+            #     break
+            #     ;;
+            *)
+                exit 2
                 ;;
             esac
         done
         ;;
-    3)
-        break
+    "Deepin 20")
+        while true; do
+
+            CHOICE=$(bsddialog --cancel-label "$(trans RETURN)" \
+                     --ok-label "$(trans OK)" \
+                     --hline "$(trans INSTALLING)Deepin 20 (apricot)" \
+                     --menu "$(trans CHOOSE_INSTALL_METHORD)" \
+                     0 0 1 \
+                     "debootstrap" "$(trans METHORD_BOOTSTRAP)" \
+                     3>&2 2>&1 1>&3)
+            STATUS=${?}
+            case ${STATUS} in
+            1)
+                break
+                ;;
+            0)
+                ;;
+            *)
+                exit 2
+                ;;
+            esac
+
+            case ${CHOICE} in
+            "debootstrap")
+                ${DIR}/scripts/fetch/deepin/20/bootstrap.sh
+                STATUS=${?}
+                case ${STATUS} in 
+                0)
+                    exit 0
+                    ;;
+                1)
+                    exit 2
+                    ;;
+                2)
+                    exit 3
+                    ;;
+                esac
+                ;;
+            # 2)
+            #     ${DIR}/scripts/fetch/debian/11/fetch.sh
+            #     break
+            #     ;;
+            *)
+                exit 2
+                ;;
+            esac
+        done
         ;;
     *)
+        exit 2
         ;;
     esac
 done
-
-if [ ${BACK_TO_MENU} -eq 1 ]; then
-    exit 9
-fi

@@ -27,60 +27,64 @@ esac
 fetch https://mirrors.ustc.edu.cn/gentoo/releases/${ARCH}/autobuilds/latest-stage3.txt -o ${DIR}/temp/gentoo-list.txt
 
 gentoo_list=""
+LIST=""
 SUM=0
 
 while IFS='' read -r LINE; do
     if echo ${LINE} | grep -q ${GREP_NAME}; then
-        gentoo_list="${gentoo_list} ${LINE%%[[:space:]]*}"
         SUM=$((SUM + 1))
+        URL=${LINE%%[[:space:]]*}
+        NAME=${URL#*amd64-}
+        gentoo_list="${gentoo_list} ${URL}"
+        LIST="${LIST} ${SUM} ${NAME%-*}"
     fi
 done < ${DIR}/temp/gentoo-list.txt
 
 while true; do
-    if [ ${BACK_TO_MENU} -eq 1 ]; then
-        break
-    fi
-    echo ""
-    echo $(trans CHOOSE_GENTOO_TYPE)
+    CHOICE=$(bsddialog --cancel-label "$(trans RETURN)" \
+             --ok-label "$(trans OK)" \
+             --hline "$(trans INSTALLING)Gentoo" \
+             --menu "$(trans CHOOSE_GENTOO_TYPE)" \
+             0 0 ${SUM} \
+             ${LIST} \
+             3>&2 2>&1 1>&3)
+
+    STATUS=${?}
+
+    case ${STATUS} in
+    1)
+        exit 5
+        ;;
+    0)
+        ;;
+    *)
+        exit 2
+        ;;
+    esac
+
     COUNT=0
     for TYPE in ${gentoo_list}; do
         COUNT=$((COUNT+1))
-        NAME=${TYPE#*amd64-}
-        echo "${COUNT}) ${NAME%-*}"
-    done
-    echo "r) $(trans RETURN)"
-    echo -n $(trans REQUIRE_CHOICE)
-
-    read CHOICE
-    case ${CHOICE} in
-    [0-9]*)
-        if [ ${CHOICE} -gt 0 ] && [ ${CHOICE} -lt $((SUM+1)) ]; then
-            COUNT=0
-            for TYPE in ${gentoo_list}; do
-                COUNT=$((COUNT+1))
-                if [ ${COUNT} -eq ${CHOICE} ]; then
-                    break
-                fi
-            done
-            export TYPE
-            NAME=${TYPE#*amd64-}
-            NAME=${NAME%-*}
-            export NAME
-            ${DIR}/scripts/fetch/gentoo.sh
-            STATUS=${?}
-            if [ ${STATUS} -eq 9 ]; then
-                BACK_TO_MENU=1
-            fi
+        if [ ${COUNT} -eq ${CHOICE} ]; then
+            break
         fi
+    done
+    export TYPE
+    NAME=${TYPE#*amd64-}
+    NAME=${NAME%-*}
+    export NAME
+
+    ${DIR}/scripts/setup/gentoo.sh
+    STATUS=${?}
+    case ${STATUS} in 
+    0)
+        exit 0
         ;;
-    r)
-        break
+    1)
+        exit 2
         ;;
-    *)
+    2)
+        exit 3
         ;;
     esac
 done
-
-if [ ${BACK_TO_MENU} -eq 1 ]; then
-    exit 9
-fi

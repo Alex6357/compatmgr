@@ -6,43 +6,35 @@ else
     . ${DIR}/i18n/en_US.sh
 fi
 
-echo $(trans CHECK_START)
 
-if [ ! "`sysrc -n linux_enable`" = "YES" ]; then
-    while true; do
-        echo -n "$(trans ENABLE_LINUX_OR_NOT)[Y|n]: "
-        read ANSWER
+if [ ! $(sysrc -qn linux_enable | grep [Yy][Ee][Ss]) ]; then
+    bsddialog --yesno "$(trans ENABLE_LINUX_OR_NOT)" 0 0
+    ANSWER=${?}
+    case ${ANSWER} in
+    1)
+        bsddialog --default-no --yesno "$(trans CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)" 0 0
+        ANSWER=${?}
         case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans WARN_START_LINUX)
-            while true; do
-                echo -n "$(trans CONTINUE_WITHOUT_LINUX_ENABLED_OR_NOT)[y|N]: "
-                read ANSWER
-                case ${ANSWER} in
-                [Yy][Ee][Ss]|[Yy])
-                    echo $(trans WARN_LINUX_NOT_ENABLED)
-                    break
-                    ;;
-                [Nn][Oo]|[Nn]|"")
-                    echo $(trans ENABLE_LINUX)
-                    sysrc linux_enable=YES
-                    break
-                    ;;
-                *)
-                    ;;
-                esac
-            done
-            break
+        0)
+            bsddialog --msgbox "$(trans WARN_LINUX_NOT_ENABLED)" 0 0
             ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans ENABLE_LINUX)
+        1)
+            echo "$(trans ENABLE_LINUX)"
             sysrc linux_enable=YES
-            break
             ;;
         *)
+            exit 5
             ;;
         esac
-    done
+        ;;
+    0)
+        echo "$(trans ENABLE_LINUX)"
+        sysrc linux_enable=YES
+        ;;
+    *)
+        exit 5
+        ;;
+    esac
 fi
 
 LINUX_ENABLED=1
@@ -70,160 +62,138 @@ if [ -z "`kldstat | grep -E "pty|fdescfs|linprocfs|linsysfs"`" ]; then
 fi
 
 if [ ${LINUX_ENABLED} = 0 ]; then
-    while true; do
-        echo -n "$(trans START_LINUX_OR_NOT)[Y|n]: "
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans ABORT_LINUX_NOT_START)
-            exit 1
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans START_LINUX)
-            service linux onestart
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
+    bsddialog --yesno "$(trans START_LINUX_OR_NOT)" 0 0
+    ANSWER=${?}
+    case ${ANSWER} in
+    1)
+        bsddialog --msgbox "$(trans ABORT_LINUX_NOT_START)" 0 0
+        exit 1
+        ;;
+    0)
+        echo "$(trans START_LINUX)"
+        service linux onestart
+        ;;
+    *)
+        exit 5
+        ;;
+    esac
 fi
 
 
-if ! which -s dbus-daemon; then
-    while true; do
-        echo -n "$(trans INSTALL_DBUS_OR_NOT)[Y|n]: "
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans ABORT_DBUS_NOT_INSTALLED)
-            exit 2
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans INSTALL_DBUS)
-            pkg install -y dbus
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
+if ! command -v dbus-daemon; then
+    bsddialog --yesno "$(trans INSTALL_DBUS_OR_NOT)" 0 0
+    ANSWER=${?}
+    case ${ANSWER} in
+    1)
+        bsddialog --msgbox "$(trans ABORT_DBUS_NOT_INSTALLED)" 0 0
+        exit 2
+        ;;
+    0)
+        echo $(trans INSTALL_DBUS)
+        pkg install -y dbus
+        ;;
+    *)
+        exit 5
+        ;;
+    esac
 fi
 
 
-if [ ! $(sysrc -n dbus_enable | grep [Yy][Ee][Ss]) ]; then
-    while true; do
-        echo -n "$(trans ENABLE_DBUS_OR_NOT)[Y|n]: "
-        read ANSWER
+if [ ! $(sysrc -qn dbus_enable | grep [Yy][Ee][Ss]) ]; then
+    bsddialog --yesno "$(trans ENABLE_DBUS_OR_NOT)" 0 0
+    ANSWER=${?}
+    case ${ANSWER} in
+    1)
+        bsddialog --default-no --yesno "$(trans CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)" 0 0
+        ANSWER=${?}
         case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans WARN_START_DBUS)
-            while true; do
-                echo -n "$(trans CONTINUE_WITHOUT_DBUS_ENABLED_OR_NOT)[y|N]: "
-                read ANSWER
-                case ${ANSWER} in
-                [Yy][Ee][Ss]|[Yy])
-                    echo $(trans WARN_DBUS_NOT_ENABLED)
-                    break
-                    ;;
-                [Nn][Oo]|[Nn]|"")
-                    echo $(trans ENABLE_DBUS)
-                    sysrc dbus_enable="YES"
-                    break
-                    ;;
-                *)
-                    ;;
-                esac
-            done
-            break
+        0)
+            bsddialog --msgbox "$(trans WARN_DBUS_NOT_ENABLED)" 0 0
             ;;
-        [Yy][Ee][Ss]|[Yy]|"")
+        1)
             echo $(trans ENABLE_DBUS)
             sysrc dbus_enable="YES"
-            break
             ;;
         *)
+            exit 5
             ;;
         esac
-    done
+        ;;
+    0)
+        echo $(trans ENABLE_DBUS)
+        sysrc dbus_enable="YES"
+        ;;
+    *)
+        exit 5
+        ;;
+    esac
 fi
 
 if [ -z "`ps aux | grep -p dbus | grep -v grep`" ]; then
-    while true; do
-        echo -n "$(trans START_DBUS_OR_NOT)[Y|n]: "
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans ABORT_DBUS_NOT_START)
-            exit 3
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans START_DBUS)
-            service dbus start
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
+    bsddialog --yesno "$(trans START_DBUS_OR_NOT)" 0 0
+    ANSWER=${?}
+    case ${ANSWER} in
+    1)
+        bsddialog --msgbox "$(trans ABORT_DBUS_NOT_START)" 0 0
+        exit 3
+        ;;
+    0)
+        echo $(trans START_DBUS)
+        service dbus start
+        ;;
+    *)
+        exit 5
+        ;;
+    esac
 fi
 
-if [ ! "`sysrc -f /boot/loader.conf -qn nullfs_load`" = "YES" ]; then
-    while true; do
-        echo -n "$(trans LOAD_NULLFS_OR_NOT)[Y|n]: "
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans WARN_LOAD_NULLFS)
-            while true; do
-                echo -n "$(trans CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)[y|N]: "
-                read ANSWER
-                case ${ANSWER} in
-                [Yy][Ee][Ss]|[Yy])
-                    echo $(trans WARN_NULLFS_NOT_LOADED)
-                    break
-                    ;;
-                [Nn][Oo]|[Nn]|"")
-                    echo $(trans LOAD_NULLFS)
-                    sysrc -f /boot/loader.conf nullfs_load="YES"
-                    break
-                    ;;
-                *)
-                    ;;
-                esac
-            done
-            break
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans LOAD_NULLFS)
-            sysrc -f /boot/loader.conf nullfs_load="YES"
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
-fi
+# if [ ! $(sysrc -f /boot/loader.conf -qn nullfs_load | grep [Yy][Ee][Ss]) ]; then
+#     bsddialog --yesno "$(trans LOAD_NULLFS_OR_NOT)" 0 0
+#     ANSWER=${?}
+#     case ${ANSWER} in
+#     1)
+#         bsddialog --default-no --yesno "$(trans CONTINUE_WITHOUT_NULLFS_LOADED_OR_NOT)" 0 0
+#         ANSWER=${?}
+#         case ${ANSWER} in
+#         0)
+#             bsddialog --msgbox "$(trans WARN_NULLFS_NOT_LOADED)" 0 0
+#             ;;
+#         1)
+#             echo $(trans LOAD_NULLFS)
+#             sysrc -f /boot/loader.conf nullfs_load="YES"
+#             ;;
+#         *)
+#             exit 5
+#             ;;
+#         esac
+#         ;;
+#     0)
+#         echo $(trans LOAD_NULLFS)
+#         sysrc -f /boot/loader.conf nullfs_load="YES"
+#         ;;
+#     *)
+#         exit 5
+#         ;;
+#     esac
+# fi
 
 
-if [ -z "`kldstat -n nullfs`" ]; then
-    while true; do
-        echo -n "$(trans LOAD_NULLFS_MODULE_OR_NOT)[Y|n]: "
-        read ANSWER
-        case ${ANSWER} in
-        [Nn][Oo]|[Nn])
-            echo $(trans ABORT_NULLFS_MODULE_NOT_LOADED)
-            exit 4
-            ;;
-        [Yy][Ee][Ss]|[Yy]|"")
-            echo $(trans LOAD_NULLFS_MODULE)
-            kldload -v nullfs
-            break
-            ;;
-        *)
-            ;;
-        esac
-    done
-fi
+# if [ -z "`kldstat -n nullfs`" ]; then
+#     bsddialog --yesno "$(trans LOAD_NULLFS_MODULE_OR_NOT)" 0 0
+#     ANSWER=${?}
+#     case ${ANSWER} in
+#     1)
+#         bsddialog --msgbox "$(trans ABORT_NULLFS_MODULE_NOT_LOADED)" 0 0
+#         exit 4
+#         ;;
+#     0)
+#         echo $(trans LOAD_NULLFS_MODULE)
+#         kldload -v nullfs
+#         ;;
+#     *)
+#         exit 5
+#         ;;
+#     esac
+# fi
 
 exit 0

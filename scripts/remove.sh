@@ -6,34 +6,67 @@ else
     . ${DIR}/i18n/en_US.sh
 fi
 
-echo -n "$(trans ENTER_DIR)"
-read DIRECTORY
-if ! [ -f ${DIRECTORY}/etc/os-release ]; then
-    echo -n "$(trans WARN_NOT_LINUX)[yes|NO]: "
-    read ANSWER
-    case ${ANSWER} in
-    [Yy][Ee][Ss])
+while true; do
+    DIRECTORY=$(bsddialog  --cancel-label "$(trans RETURN)" \
+                --ok-label "$(trans OK)" \
+                --inputbox "$(trans ENTER_DIR)" \
+                0 0 \
+                3>&2 2>&1 1>&3)
+    STATUS=${?}
+    case ${STATUS} in
+    0)
+        ;;
+    1)
+        exit 0
         ;;
     *)
-        echo "$(trans ABORT)"
-        exit 1
+        exit 2
         ;;
     esac
-fi
 
-echo "$(trans WARN_REMOVE)[yes|NO]: "
-read ANSWER
+    DIRECTORY=$(echo ${DIRECTORY} | sed 's|[/]\{1,\}|/|g')
+    DIRECTORY=${DIRECTORY#/}
+    DIRECTORY=${DIRECTORY%/}
+    DIRECTORY="/${DIRECTORY}"
+
+    case ${DIRECTORY} in
+    ""|"/")
+        bsddialog --msgbox "$(trans WARN_ROOT_DIR)" 0 0
+        continue
+        ;;
+    *)
+        ;;
+    esac
+
+    if ! [ -f ${DIRECTORY}/etc/os-release ]; then
+        bsddialog --yesno --default-no "$(trans WARN_NOT_LINUX)" 0 0
+        ANSWER=${?}
+        case ${ANSWER} in
+        0)
+            break
+            ;;
+        *)
+            continue
+            ;;
+        esac
+    fi
+    break
+done
+
+bsddialog --yesno --default-no "$(trans WARN_REMOVE)" 0 0
+ANSWER=${?}
 case ${ANSWER} in
-[Yy][Ee][Ss])
+0)
     ;;
 *)
-    echo "$(trans ABORT)"
-    exit 1
+    exit 2
     ;;
 esac
 
+umount -f $(mount | grep -o -e "${DIRECTORY}/[^ ]*")
 rm -rf ${DIRECTORY}
 
-sed -i '' -e "|${DIRECTORY}/|d" /etc/fstab
-
-echo "$(trans DONE)"
+DIRECTORY=$(echo ${DIRECTORY} | sed 's/\//\\\//g')
+sed -i '' -e "/${DIRECTORY}\//d" /etc/fstab
+bsddialog --msgbox "$(trans DONE)" 0 0
+exit 0

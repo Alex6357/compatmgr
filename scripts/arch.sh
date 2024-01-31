@@ -6,21 +6,15 @@ else
     . ${DIR}/i18n/en_US.sh
 fi
 
-if [ "${MACHINE_ARCH}" = "i386" ]; then
-    bsddialog --msgbox "$(trans FEDORA_ARCH_NOT_SUPPORTED)" 0 0
-    exit 1
-fi
-
 while true; do
     CHOICE=$(bsddialog --cancel-label "$(trans RETURN)" \
              --ok-label "$(trans OK)" \
-             --hline "$(trans INSTALLING)Fedora" \
-             --menu "$(trans CHOOSE_FEDORA_TYPE)" \
+             --hline "$(trans INSTALLING)Arch Linux" \
+             --menu "$(trans CHOOSE_INSTALL_METHORD)" \
              0 0 2 \
-             "Base" "" \
-             "Minimal Base" "$(trans MINIMAL_NOT_RECOMMENDED)" \
+             "prebuilt" "$(trans METHORD_USTC_PREBUILT)" \
+             "pacman" "$(trans METHORD_PACMAN)" \
              3>&2 2>&1 1>&3)
-
     STATUS=${?}
     case ${STATUS} in
     1)
@@ -34,14 +28,14 @@ while true; do
     esac
 
     case ${CHOICE} in
-    "Base")
-        export TYPE="Base"
-        ${DIR}/scripts/setup/fedora.sh
+    "prebuilt")
+        export METHORD="prebuilt"
+        ${DIR}/scripts/setup/arch.sh
         STATUS=${?}
         ;;
-    "Minimal Base")
-        export TYPE="Minimal-Base"
-        ${DIR}/scripts/setup/fedora.sh
+    "pacman")
+        export METHORD="pacman"
+        ${DIR}/scripts/setup/arch.sh
         STATUS=${?}
         ;;
     *)
