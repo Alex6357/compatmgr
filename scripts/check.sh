@@ -7,7 +7,7 @@ else
 fi
 
 
-if [ ! $(sysrc -qn linux_enable | grep [Yy][Ee][Ss]) ]; then
+if ! $(sysrc -qn linux_enable | grep -qe '[Yy][Ee][Ss]'); then
     bsddialog --yesno "$(trans ENABLE_LINUX_OR_NOT)" 0 0
     ANSWER=${?}
     case ${ANSWER} in
@@ -99,7 +99,7 @@ if ! command -v dbus-daemon > /dev/null 2>&1; then
 fi
 
 
-if [ ! $(sysrc -qn dbus_enable | grep [Yy][Ee][Ss]) ]; then
+if ! sysrc -qn dbus_enable | grep -qe '[Yy][Ee][Ss]'; then
     bsddialog --yesno "$(trans ENABLE_DBUS_OR_NOT)" 0 0
     ANSWER=${?}
     case ${ANSWER} in
