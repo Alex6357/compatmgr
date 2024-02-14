@@ -80,7 +80,7 @@ if [ ${LINUX_ENABLED} = 0 ]; then
 fi
 
 
-if ! command -v dbus-daemon; then
+if ! command -v dbus-daemon > /dev/null 2>&1; then
     bsddialog --yesno "$(trans INSTALL_DBUS_OR_NOT)" 0 0
     ANSWER=${?}
     case ${ANSWER} in

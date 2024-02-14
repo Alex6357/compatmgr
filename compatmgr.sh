@@ -8,7 +8,7 @@ else
     . ${DIR}/i18n/en_US.sh
 fi
 
-if ! command -v bsddialog; then
+if ! command -v bsddialog > /dev/null 2>&1; then
     echo $(trans BSDDIALOG_NOT_FOUND)    
     exit 1
 fi

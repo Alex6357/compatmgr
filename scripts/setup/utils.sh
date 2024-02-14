@@ -70,7 +70,7 @@ get_install_dir(){
 }
 
 check_debootstrap(){
-    if ! command -v debootstrap; then
+    if ! command -v debootstrap > /dev/null 2>&1; then
         bsddialog --yesno "$(trans INSTALL_DEBOOTSTRAP_OR_NOT)" 0 0 3>&2 2>&1 1>&3
         ANSWER=${?}
         case ${ANSWER} in
