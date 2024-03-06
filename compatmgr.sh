@@ -103,10 +103,6 @@ while true; do
                 ${DIR}/scripts/kali.sh
                 STATUS=${?}
                 ;;
-            "Deepin")
-                ${DIR}/scripts/deepin.sh
-                STATUS=${?}
-                ;;
             "Fedora")
                 ${DIR}/scripts/fedora.sh
                 STATUS=${?}
