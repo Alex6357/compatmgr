@@ -76,7 +76,7 @@ while true; do
 
     ${DIR}/scripts/setup/gentoo.sh
     STATUS=${?}
-    case ${STATUS} in 
+    case ${STATUS} in
     0)
         exit 0
         ;;

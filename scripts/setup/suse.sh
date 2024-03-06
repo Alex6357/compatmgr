@@ -106,7 +106,7 @@ case ${ANSWER} in
     ;;
 0)
     echo $(trans ADD_SOURCE)
-    case ${PKG} in 
+    case ${PKG} in
     "zypper")
         case ${TYPE} in
         "Leap")

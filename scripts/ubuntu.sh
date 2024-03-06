@@ -55,7 +55,7 @@ while true; do
                 export VERSION="22.04"
                 ${DIR}/scripts/setup/ubuntu.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -72,7 +72,7 @@ while true; do
                 export VERSION="22.04"
                 ${DIR}/scripts/setup/ubuntu.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -118,7 +118,7 @@ while true; do
                 export VERSION="20.04"
                 ${DIR}/scripts/setup/ubuntu.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -135,7 +135,7 @@ while true; do
                 export VERSION="20.04"
                 ${DIR}/scripts/setup/ubuntu.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;

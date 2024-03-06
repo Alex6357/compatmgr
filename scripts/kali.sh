@@ -31,7 +31,7 @@ while true; do
         export METHORD="debootstrap"
         ${DIR}/scripts/setup/kali.sh
         STATUS=${?}
-        case ${STATUS} in 
+        case ${STATUS} in
         0)
             exit 0
             ;;

@@ -57,7 +57,7 @@ while true; do
                 export PKG="zypper"
                 ${DIR}/scripts/setup/suse.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -75,7 +75,7 @@ while true; do
                 export PKG="dnf"
                 ${DIR}/scripts/setup/suse.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -120,7 +120,7 @@ while true; do
                 export TYPE="Tumbleweed"
                 export PKG="zypper"
                 ${DIR}/scripts/setup/suse.sh
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -137,7 +137,7 @@ while true; do
                 export PKG="dnf"
                 ${DIR}/scripts/setup/suse.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;

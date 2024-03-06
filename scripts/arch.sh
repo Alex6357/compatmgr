@@ -42,7 +42,7 @@ while true; do
         exit 2
         ;;
     esac
-    case ${STATUS} in 
+    case ${STATUS} in
     0)
         exit 0
         ;;

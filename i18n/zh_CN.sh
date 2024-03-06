@@ -104,7 +104,7 @@ trans () {
         ;;
     "ENABLE_LINUX")
         echo "正在启用 Linux 兼容层"
-        ;;      
+        ;;
     "START_LINUX_OR_NOT")
         echo "Linux 兼容层看起来并没有被加载。 是否现在加载 Linux 兼容层？"
         ;;

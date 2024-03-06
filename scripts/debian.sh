@@ -58,7 +58,7 @@ while true; do
                 export VERSION=12
                 ${DIR}/scripts/setup/debian.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -108,7 +108,7 @@ while true; do
                 export VERSION=12
                 ${DIR}/scripts/setup/debian.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;

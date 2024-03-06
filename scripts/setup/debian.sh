@@ -73,7 +73,7 @@ case ${ANSWER} in
     ;;
 0)
     echo $(trans ADD_SOURCE)
-    case ${VERSION} in 
+    case ${VERSION} in
     12)
         cat >${INSTALL_DIR}/etc/apt/sources.list.d/debian.sources<< EOF
 Types: deb

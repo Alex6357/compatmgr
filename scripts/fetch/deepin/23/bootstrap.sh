@@ -92,7 +92,7 @@ while true; do
     else
         mkdir -p ${INSTALL_DIR}
         break
-    fi          
+    fi
 done
 
 echo ""

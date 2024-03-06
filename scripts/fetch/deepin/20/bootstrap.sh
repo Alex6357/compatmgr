@@ -92,7 +92,7 @@ while true; do
     else
         mkdir -p ${INSTALL_DIR}
         break
-    fi          
+    fi
 done
 
 cp /usr/local/share/debootstrap/scripts/bookworm /usr/local/share/debootstrap/scripts/apricot

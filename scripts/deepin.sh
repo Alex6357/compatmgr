@@ -54,7 +54,7 @@ while true; do
             "debootstrap")
                 ${DIR}/scripts/fetch/deepin/23/bootstrap.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;
@@ -102,7 +102,7 @@ while true; do
             "debootstrap")
                 ${DIR}/scripts/fetch/deepin/20/bootstrap.sh
                 STATUS=${?}
-                case ${STATUS} in 
+                case ${STATUS} in
                 0)
                     exit 0
                     ;;

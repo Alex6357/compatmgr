@@ -149,7 +149,7 @@ case ${ANSWER} in
     ;;
 0)
     echo $(trans ADD_SOURCE)
-    case ${VERSION} in 
+    case ${VERSION} in
     "22.04")
         cat >${INSTALL_DIR}/etc/apt/sources.list<< EOF
 deb http://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse
