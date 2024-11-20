@@ -129,7 +129,7 @@ if ! sysrc -qn dbus_enable | grep -qe '[Yy][Ee][Ss]'; then
     esac
 fi
 
-if [ -z "`ps aux | grep -p dbus | grep -v grep`" ]; then
+if [ -z "`service dbus status | grep pid`" ]; then
     bsddialog --yesno "$(trans START_DBUS_OR_NOT)" 0 0
     ANSWER=${?}
     case ${ANSWER} in
