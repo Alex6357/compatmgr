@@ -5,7 +5,7 @@ get_install_dir(){
         INSTALL_DIR=$(bsddialog --cancel-label "$(trans CANCEL_INSTALLATION)" \
                         --ok-label "$(trans OK)" \
                         --inputbox "$(trans CHANGE_INSTALL_DIR_OR_NOT)" \
-                        0 40 \
+                        0 60 \
                         "${DEFAULT_INSTALL_DIR}" \
                         3>&2 2>&1 1>&3)
         STATUS=${?}
