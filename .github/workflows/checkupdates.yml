@@ -25,7 +25,7 @@ jobs:
       id: updates
       run: |
         echo "Checking for updates..."
-        python script.py
+        python scripts/checkupdates.py
       env:
         FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
         TO_EMAIL: ${{ secrets.TO_EMAIL }}
