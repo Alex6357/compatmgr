@@ -1,0 +1,36 @@
+name: Check Distrowatch Updates
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install feedparser requests
+
+    - name: Check for updates
+      id: updates
+      run: |
+        echo "Checking for updates..."
+        python script.py
+      env:
+        FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+        TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        TOKEN: ${{ secrets.TOKEN }}
+        LAST_UPDATES: ${{ env.LAST_UPDATES }}
+        WATCHED_DISTROS: ${{ env.WATCHED_DISTROS }}
