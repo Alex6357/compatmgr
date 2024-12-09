@@ -39,7 +39,7 @@ def checkUpdates():
 
     if updates:
         print("更新内容：\n" + '\n'.join(updates) + '\n')
-        updateLastUpdates(updates)
+        updateLastUpdates(new_updates)
         if watched_updates:
             print("监视的发行版有更新：\n" + '\n'.join(watched_updates) + '\n')
             sendEmail(watched_updates)
